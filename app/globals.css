@@ -817,21 +817,42 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
 
 /* ---------- KPIs (Expoflores) ---------- */
 
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.2rem; }
+/* Franja de estadísticas: plana por defecto (número + etiqueta, sin caja
+   de color), no cuatro tarjetas idénticas. El acento de color se reserva
+   para lo que de verdad es un indicador de estado (alertas), nunca como
+   decoración pareja en las cuatro. Separador vertical hairline entre
+   columnas, no bordes de color. */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gris-borde);
+}
 
 .kpi {
-  background: var(--azul-fondo);
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
   display: flex;
   flex-direction: column;
 }
 
-.kpi-valor { font-size: 1.9rem; font-weight: 700; color: var(--azul); }
+.kpi-valor { font-size: 1.9rem; font-weight: 700; color: var(--tinta); line-height: 1.1; }
 
-.kpi-etiqueta { font-size: 0.85rem; color: var(--gris); }
+.kpi-etiqueta { font-size: 0.85rem; color: var(--gris); margin-top: 0.2rem; }
 
-.kpi-alerta { background: var(--coral-fondo); }
+/* Alertas abiertas es el único KPI que representa un estado a vigilar:
+   su valor lleva color coral de forma permanente en cuanto hay alertas
+   (>0), igual que .flag-alerta — color de texto, sin caja ni borde. */
+.kpi-watch .kpi-valor { color: var(--coral); }
+
+/* Momento exacto en que la alerta se abre o se resuelve: única vez que un
+   KPI recibe una caja de color completa, igual que .fila-alerta/.banner-alerta. */
+.kpi-alerta {
+  background: var(--coral-fondo);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: -0.85rem -1rem;
+}
 
 .kpi-alerta .kpi-valor { color: var(--coral); }
 

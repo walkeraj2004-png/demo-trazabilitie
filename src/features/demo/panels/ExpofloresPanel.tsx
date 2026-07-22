@@ -69,7 +69,7 @@ export function ExpofloresPanel({ estado }: { estado: number }) {
         <Kpi
           valor={String(alertas)}
           etiqueta={t("kpi_alertas_abiertas")}
-          extra={alertaAbierta ? "kpi-alerta" : undefined}
+          extra={cx(alertas > 0 && "kpi-watch", alertaAbierta && "kpi-alerta")}
           resaltar={alertaAbierta || alertaResuelta}
         />
         <Kpi valor={AGREGADOS.tiempoPromedio} etiqueta={t("kpi_tiempo_promedio")} />
