@@ -1,0 +1,32 @@
+/* Reset mínimo. El sistema de diseño real (tokens, tipografía, color)
+   llega en F3 — aquí solo lo indispensable para que F0 sea legible. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family:
+    system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1a1a1a;
+  background: #fafafa;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
