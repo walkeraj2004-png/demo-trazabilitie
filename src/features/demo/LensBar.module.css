@@ -1,0 +1,82 @@
+/* Barra de lente. Paleta global del sistema. Chips con feedback de press
+   (Emil: scale en :active, transiciones cortas ease-out). */
+
+.wrap {
+  max-width: 760px;
+  margin: 1.6rem auto 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-size: 0.82rem;
+  color: var(--gris);
+  flex-shrink: 0;
+}
+
+.opciones {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  position: relative;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--azul);
+  background: var(--azul-fondo);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.4rem 0.95rem;
+  min-height: 40px;
+  cursor: pointer;
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1),
+    background 140ms ease, color 140ms ease;
+}
+
+.chip:hover {
+  border-color: var(--azul-claro);
+}
+
+.chip:active {
+  transform: scale(0.97);
+}
+
+.chipActivo {
+  background: var(--azul);
+  color: #fff;
+}
+
+.punto {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+
+.explica {
+  margin-top: 0.7rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--tinta);
+  max-width: 60ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: background 140ms ease, color 140ms ease;
+  }
+  .chip:active {
+    transform: none;
+  }
+}
