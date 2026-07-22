@@ -63,8 +63,17 @@ Justificación (no es moda):
 - [x] F0 · legacy preservado en `legacy/`
 - [x] F0 · i18n portado (ES/EN): `t()` pura + provider React SSR-safe + toggle
 - [x] F2 (adelanto) · landing reconstruida como pantalla React (`/`)
-- [ ] F1 · pantalla del demo: vistas por rol + simulación + avance por escaneo ← **en curso**
+- [x] F1 · pantalla del demo completa: simulación + 4 vistas por rol + custodia por caja + QR
+- [x] Diseño: sistema visual del POC adoptado (no placeholder IA)
+- [ ] F1 · pantalla `/caja` (destino de los QR) ← **siguiente inmediato**
 - [ ] F1 · endpoint de fusión (Xpotrack/courier) + prueba vendible
+
+### Arquitectura del demo (F1)
+- Dominio puro: `timeline.ts` (buildLog/eventosCaja/ultimoEscaneo) sin DOM ni i18n.
+- Estado: `useDemoState` (fuente única, persistencia localStorage).
+- Cambios sin ver: `changes.ts` (predicado explícito por pestaña, no DOM-scraping).
+- Presentación: `actorLabel` resuelve ActorId→texto; paneles por rol reusan
+  las clases del sistema visual real.
 
 ### Cómo ver el avance
 - Local: http://localhost:3000  ·  Teléfono (misma WiFi): http://192.168.0.164:3000

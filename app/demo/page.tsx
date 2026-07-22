@@ -1,25 +1,65 @@
 "use client";
-import Link from "next/link";
-import { useT } from "@/i18n";
-import { PEDIDO, TOTAL_ESTADOS } from "@/domain";
+/* =====================================================================
+   TrazaFlor · pantalla del demo
+   Orquesta la simulación: barra, progreso, pestañas por rol, el panel
+   activo y el toast. El estado vive en useDemoState (fuente única).
+   ===================================================================== */
+import { useEffect } from "react";
+import { PEDIDO } from "@/domain";
+import { useI18n } from "@/i18n";
+import { useDemoState } from "@/features/demo/useDemoState";
+import { SimBar } from "@/features/demo/SimBar";
+import { Progreso } from "@/features/demo/Progreso";
+import { TabsNav } from "@/features/demo/TabsNav";
+import { Toast } from "@/features/demo/Toast";
+import { FincaPanel } from "@/features/demo/panels/FincaPanel";
+import { ExpofloresPanel } from "@/features/demo/panels/ExpofloresPanel";
+import { AgenciaPanel } from "@/features/demo/panels/AgenciaPanel";
+import { AgrocalidadPanel } from "@/features/demo/panels/AgrocalidadPanel";
+
+const ARIA: Record<string, string> = {
+  finca: "aria_vista_finca",
+  expoflores: "aria_vista_expoflores",
+  agencia: "aria_vista_agencia",
+  agrocalidad: "aria_vista_agrocalidad",
+};
 
 export default function DemoPage() {
-  const t = useT();
+  const { t } = useI18n();
+  const s = useDemoState();
+
+  useEffect(() => {
+    document.title = t("titulo_demo", { id: PEDIDO.id });
+  }, [t]);
+
   return (
-    <main style={{ maxWidth: "48rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
-      <h1 style={{ fontSize: "1.5rem", color: "#14532d" }}>
-        {t("titulo_demo", { id: PEDIDO.id })}
-      </h1>
-      <p style={{ marginTop: "1rem", color: "#555" }}>
-        Pantalla del demo en construcción (F1): las 4 vistas por rol, la barra
-        de simulación y el avance por escaneo se reconstruyen aquí sobre el
-        dominio ya extraído ({TOTAL_ESTADOS} estados).
-      </p>
-      <p style={{ marginTop: "1.5rem" }}>
-        <Link href="/" style={{ color: "#14532d" }}>
-          ← {t("volver_demo").replace("←", "").trim()}
-        </Link>
-      </p>
-    </main>
+    <>
+      <SimBar
+        estado={s.estado}
+        puedeAvanzar={s.puedeAvanzar}
+        onAvanzar={s.avanzar}
+        onReiniciar={s.reiniciar}
+      />
+
+      <Progreso estado={s.estado} onIr={s.irA} />
+
+      <TabsNav
+        estado={s.estado}
+        activa={s.tab}
+        vistas={s.vistas}
+        onActivar={s.activarTab}
+      />
+
+      <main>
+        <section className="tab-panel visible" aria-label={t(ARIA[s.tab]!)}>
+          {s.tab === "finca" && <FincaPanel estado={s.estado} />}
+          {s.tab === "expoflores" && <ExpofloresPanel estado={s.estado} />}
+          {s.tab === "agencia" && <AgenciaPanel estado={s.estado} onEscanear={s.avanzar} />}
+          {s.tab === "agrocalidad" && <AgrocalidadPanel estado={s.estado} />}
+        </section>
+      </main>
+
+      <Toast msg={s.toastMsg} />
+    </>
   );
 }
