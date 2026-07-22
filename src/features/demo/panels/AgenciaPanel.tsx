@@ -12,9 +12,18 @@ import {
   NUM_ALERTA_ABIERTA,
   NUM_PALETIZADO,
 } from "@/domain";
-import { useT } from "@/i18n";
+import { useI18n } from "@/i18n";
 import { cx, Nuevo } from "@/presentation/ui";
+import { RoleBanner } from "../RoleBanner";
 import { Campo, TablaLog, BannerAlerta } from "./parts";
+
+/* Glosas en lenguaje simple para siglas del sector, junto al dato (no en
+   un tooltip que nadie hace hover). "en/es" porque el POC no traía estas
+   frases en el diccionario grande. */
+const GLOSA = {
+  es: { awbHawb: "guía aérea", dae: "declaración aduanera" },
+  en: { awbHawb: "airway bill", dae: "customs declaration" },
+} as const;
 
 const NUM_ETIQUETADO = numeroDeEstado("etiquetado");
 
@@ -25,7 +34,8 @@ export function AgenciaPanel({
   estado: number;
   onEscanear: () => void;
 }) {
-  const t = useT();
+  const { t, lang } = useI18n();
+  const glosa = GLOSA[lang];
   const p = PEDIDO;
   const tallosTotal = `${(p.producto.cajas * p.producto.tallosPorCaja).toLocaleString("en-US")} ${t("unidad_tallos")}`;
   const consolidacionAutorizada = estado >= NUM_PALETIZADO;
@@ -37,6 +47,7 @@ export function AgenciaPanel({
 
   return (
     <>
+      <RoleBanner rol="agencia" />
       <BannerAlerta estado={estado} />
 
       <div className={cx("panel", estado === 1 && "nuevo")}>
@@ -85,10 +96,10 @@ export function AgenciaPanel({
             )}
           </Campo>
           <Campo rol="agencia" campo="logistica" etiqueta={t("label_awb_hawb")}>
-            {p.awb} / {p.hawb}
+            {p.awb} / {p.hawb} <span className="glosa">({glosa.awbHawb})</span>
           </Campo>
           <Campo rol="agencia" campo="logistica" etiqueta={t("label_dae")}>
-            {p.dae}
+            {p.dae} <span className="glosa">({glosa.dae})</span>
           </Campo>
           <Campo rol="agencia" campo="logistica" etiqueta={t("label_destino_vuelo")}>
             {p.destino} · {p.vuelo}

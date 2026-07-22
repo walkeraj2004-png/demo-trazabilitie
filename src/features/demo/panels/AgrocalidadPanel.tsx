@@ -17,6 +17,7 @@ import { cx, Nuevo } from "@/presentation/ui";
 import { actorLabel } from "@/presentation/actors";
 import { hrefCaja, urlCaja } from "@/presentation/links";
 import { Qr } from "../Qr";
+import { RoleBanner } from "../RoleBanner";
 import { Campo } from "./parts";
 
 export function AgrocalidadPanel({ estado }: { estado: number }) {
@@ -25,6 +26,8 @@ export function AgrocalidadPanel({ estado }: { estado: number }) {
 
   return (
     <>
+      <RoleBanner rol="agrocalidad" />
+
       {/* Datos comerciales — siempre con candado */}
       <div className="panel panel-compacto">
         <div className="campos campos-linea">

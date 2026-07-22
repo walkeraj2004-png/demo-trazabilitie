@@ -9,6 +9,7 @@ import { useI18n } from "@/i18n";
 import { cx, Nuevo } from "@/presentation/ui";
 import { hrefCaja, urlCaja } from "@/presentation/links";
 import { Qr } from "../Qr";
+import { RoleBanner } from "../RoleBanner";
 import { Campo, TablaLog, BannerAlerta } from "./parts";
 
 export function FincaPanel({ estado }: { estado: number }) {
@@ -21,6 +22,7 @@ export function FincaPanel({ estado }: { estado: number }) {
 
   return (
     <>
+      <RoleBanner rol="finca" />
       <BannerAlerta estado={estado} />
 
       <div className={cx("panel", estado === 1 && "nuevo")}>

@@ -16,6 +16,7 @@ import {
 } from "@/domain";
 import { useT } from "@/i18n";
 import { cx, Nuevo } from "@/presentation/ui";
+import { RoleBanner } from "../RoleBanner";
 import { BannerAlerta } from "./parts";
 
 function Kpi({
@@ -54,6 +55,7 @@ export function ExpofloresPanel({ estado }: { estado: number }) {
 
   return (
     <>
+      <RoleBanner rol="expoflores" />
       <BannerAlerta estado={estado} />
 
       <div className="nota-gobernanza">{t("nota_gobernanza")}</div>
