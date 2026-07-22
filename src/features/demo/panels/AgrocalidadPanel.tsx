@@ -26,10 +26,16 @@ import { HtmlText } from "@/presentation/HtmlText";
 import { Campo } from "./parts";
 
 function vistaRelevante(estado: number): string {
+  // Estado 1: nada de esto ha pasado todavía. "Validación" es la próxima
+  // etapa real de Agrocalidad; aterrizar en "Certificación" (la ÚLTIMA
+  // etapa, vacía) como primera impresión no cuenta la historia correcta.
+  if (estado === 1) return "validacion";
   if (estado === 2) return "validacion";
   if (estado === 3) return "etiquetas";
   if (estado === NUM_ALERTA_ABIERTA || estado === NUM_CFE_EMITIDO) return "certificacion";
   if (ESTADOS[estado - 1]?.cajaEvento?.esEscaneo) return "custodia";
+  // A partir de aquí (7, 9…) el trabajo de Agrocalidad ya está completo:
+  // certificación es el estado estable, no un vacío.
   return "certificacion";
 }
 
