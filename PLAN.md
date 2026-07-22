@@ -50,9 +50,19 @@ Justificación (no es moda):
 - `/owasp-enterprise` cuando haya auth y manejo real de secretos.
 
 ## Reglas de trabajo
-- Todo en la rama `desarrollo`. No se toca `main`.
+- `desarrollo` se mergeó a `main` (PR #1). A partir de ahora se trabaja
+  directo en `main`; `desarrollo` queda para cambios grandes que se
+  quieran revisar antes de integrar.
 - Preservar comportamiento del dominio salvo mejora explícita.
 - El diseño visual va al final; la base técnica y la prueba de fusión van primero.
+
+## Tensión arquitectónica registrada (resolver antes de F1)
+GitHub Pages exige export estático (`output: "export"`, ver
+`.github/workflows/deploy.yml`) porque no corre servidor Node. Pero F1
+(fusión Xpotrack/couriers) necesita API routes con llaves — imposible en
+estático. Cuando arranque F1: mover el deploy a un host con servidor
+(Vercel u otro) y retirar `output: "export"` + el workflow de Pages. No
+es una sorpresa: quedó anotado desde la decisión de stack original.
 
 ## Estado actual
 - [x] Rama `desarrollo` creada
@@ -66,9 +76,16 @@ Justificación (no es moda):
 - [x] F1 · pantalla del demo completa: simulación + 4 vistas por rol + custodia por caja + QR
 - [x] Diseño: sistema visual del POC adoptado (no placeholder IA)
 - [x] F1 · pantalla `/caja` (destino de los QR) — flujo completo cerrado
+- [x] Fix: bugs reales (HTML literal, panel ámbar, plural, lógica de consolidación) — encontrados con acceso real al navegador
+- [x] Demo: Finca/Agrocalidad divididos en sub-vistas navegables (SubNav) — ya no es scroll infinito
+- [x] Infra: export estático + GitHub Actions para Pages (`.github/workflows/deploy.yml`), basePath/assetPath correctos
 - [ ] Landing: faltan secciones "guía" y "escáneame" (QR) del POC
 - [ ] F1 · endpoint de fusión (Xpotrack/courier) + prueba vendible ← **el foso**
 - [ ] F3 · elevación de diseño (design-taste-frontend + apple-design)
+
+### Pendiente manual (una sola vez, en GitHub, no vía código)
+- Settings → Pages → Source → cambiar a **GitHub Actions** (hoy probablemente
+  sigue en "Deploy from branch", que serviría el código fuente sin compilar).
 
 ### Arquitectura del demo (F1)
 - Dominio puro: `timeline.ts` (buildLog/eventosCaja/ultimoEscaneo) sin DOM ni i18n.

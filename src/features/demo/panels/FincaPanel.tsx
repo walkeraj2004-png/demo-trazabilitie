@@ -6,6 +6,7 @@
    secciones apiladas) — vuelve a "Expediente" cada vez que avanza el
    estado, para que lo resaltado nunca quede enterrado.
    ===================================================================== */
+import Link from "next/link";
 import { PEDIDO, CAJAS, buildLog, NUM_ALERTA_ABIERTA, NUM_CFE_EMITIDO } from "@/domain";
 import { useI18n } from "@/i18n";
 import { cx, Nuevo } from "@/presentation/ui";
@@ -143,11 +144,11 @@ export function FincaPanel({ estado }: { estado: number }) {
                 <h3>{t("cajas_titulo")}</h3>
                 <div className="grid-cajas">
                   {CAJAS.map((c) => (
-                    <a className="caja-card" href={hrefCaja(c.id)} key={c.id}>
+                    <Link className="caja-card" href={hrefCaja(c.id)} key={c.id}>
                       <Qr url={urlCaja(c.id, estado, lang)} size={72} />
                       <span className="caja-id">{c.id}</span>
                       <span className="caja-etq">{estado >= 3 ? c.etiqueta : t("sin_etiqueta")}</span>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

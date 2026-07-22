@@ -7,6 +7,7 @@
    sí lo necesitaba por usar innerHTML).
    ===================================================================== */
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
   CAJAS,
@@ -61,7 +62,7 @@ export function CajaView() {
           <h2>{t("caja_no_encontrada_titulo")}</h2>
           <p>{t("caja_no_encontrada_texto", { id, pedido: PEDIDO.id })}</p>
           <p>
-            <a href="/demo">{t("volver_demo")}</a>
+            <Link href="/demo">{t("volver_demo")}</Link>
           </p>
         </div>
       </main>

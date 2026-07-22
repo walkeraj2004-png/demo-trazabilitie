@@ -14,6 +14,7 @@ import {
   NUM_CFE_EMITIDO,
   NUM_ALERTA_ABIERTA,
 } from "@/domain";
+import Link from "next/link";
 import { useI18n } from "@/i18n";
 import { cx, Nuevo } from "@/presentation/ui";
 import { actorLabel } from "@/presentation/actors";
@@ -114,11 +115,11 @@ export function AgrocalidadPanel({ estado }: { estado: number }) {
                     </p>
                     <div className="grid-cajas grid-cajas-chica">
                       {CAJAS.map((c) => (
-                        <a className="caja-card" href={hrefCaja(c.id)} key={c.id}>
+                        <Link className="caja-card" href={hrefCaja(c.id)} key={c.id}>
                           <Qr url={urlCaja(c.id, estado, lang)} size={64} />
                           <span className="caja-id">{c.id}</span>
                           <span className="caja-etq">{c.etiqueta}</span>
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </>
@@ -156,7 +157,7 @@ export function AgrocalidadPanel({ estado }: { estado: number }) {
                         return (
                           <tr className={cx(filaNueva && "nuevo")} key={c.id}>
                             <td>
-                              <a href={hrefCaja(c.id)}>{c.id}</a>
+                              <Link href={hrefCaja(c.id)}>{c.id}</Link>
                             </td>
                             <td>{c.etiqueta}</td>
                             <td>
