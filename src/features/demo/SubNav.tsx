@@ -31,32 +31,43 @@ export function SubNav({
 }) {
   const inicial = views.find((v) => v.id === defaultId)?.id ?? views[0]!.id;
   const [activa, setActiva] = useState(inicial);
+  // Igual que las pestañas de rol: una sub-vista visitada no debe seguir
+  // mostrando su punto de "cambios sin ver" el resto de este estado.
+  const [vistas, setVistas] = useState<string[]>([inicial]);
 
-  // Al cambiar de estado, vuelve a la vista relevante: lo nuevo nunca
-  // queda enterrado en una sub-vista que el usuario no tiene abierta.
   useEffect(() => {
-    setActiva(views.find((v) => v.id === defaultId)?.id ?? views[0]!.id);
+    const destino = views.find((v) => v.id === defaultId)?.id ?? views[0]!.id;
+    setActiva(destino);
+    setVistas([destino]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetKey]);
+
+  function irA(id: string) {
+    setActiva(id);
+    setVistas((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  }
 
   const vista = views.find((v) => v.id === activa) ?? views[0]!;
 
   return (
     <div className="subnav-wrap">
       <div className="subnav-pills" role="tablist">
-        {views.map((v) => (
-          <button
-            key={v.id}
-            type="button"
-            role="tab"
-            aria-selected={v.id === activa}
-            className={cx("subnav-pill", v.id === activa && "activa")}
-            onClick={() => setActiva(v.id)}
-          >
-            {v.label}
-            {v.tieneCambios && v.id !== activa && <span className="subnav-punto" aria-hidden="true" />}
-          </button>
-        ))}
+        {views.map((v) => {
+          const mostrarPunto = v.tieneCambios && v.id !== activa && !vistas.includes(v.id);
+          return (
+            <button
+              key={v.id}
+              type="button"
+              role="tab"
+              aria-selected={v.id === activa}
+              className={cx("subnav-pill", v.id === activa && "activa")}
+              onClick={() => irA(v.id)}
+            >
+              {v.label}
+              {mostrarPunto && <span className="subnav-punto" aria-hidden="true" />}
+            </button>
+          );
+        })}
       </div>
       <div className={swap.swap} key={vista.id}>
         {vista.content}
