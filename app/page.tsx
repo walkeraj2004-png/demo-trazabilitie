@@ -1,89 +1,91 @@
-import {
-  ESTADOS,
-  ROLES,
-  TOTAL_ESTADOS,
-  PEDIDO,
-  PERMISOS,
-  type EstadoKey,
-  type Rol,
-} from "@/domain";
-import { APP_NAME, CREDITO } from "@/config";
+"use client";
+import Link from "next/link";
+import { useT } from "@/i18n";
+import { ESTADOS } from "@/domain";
+import styles from "./page.module.css";
 
-/* Etiquetas provisionales solo para verificar el cableado del dominio en
-   F0. En el siguiente sub-paso se reemplazan por la capa i18n portada
-   desde legacy/i18n.js (ES/EN). No es copy final. */
-const NOMBRE_ESTADO: Record<EstadoKey, string> = {
-  creado: "Pedido creado",
-  validado_guia: "Validado en GUIA",
-  etiquetado: "Etiquetado",
-  recibido_agencia: "Recibido en agencia",
-  cfe_emitido: "CFE · ePhyto emitido",
-  paletizado: "Paletizado",
-  salida_autorizada: "Salida autorizada",
-  embarcado: "Embarcado",
-  cerrado: "DAE cerrada",
-};
+/* Tipo visual de cada nodo del flujo (estado del sistema vs actor privado).
+   Derivado de la posición en la máquina de estados, no escrito a mano. */
+const TIPO_NODO: ("estado" | "privado")[] = ESTADOS.map((_, i) =>
+  [0, 3, 5, 7].includes(i) ? "privado" : "estado",
+);
 
-const NOMBRE_ROL: Record<Rol, string> = {
-  finca: "Finca",
-  expoflores: "Expoflores",
-  agencia: "Agencia de carga",
-  agrocalidad: "Agrocalidad",
-};
+const RESTRICCIONES = [1, 2, 3, 4, 5, 6] as const;
 
 export default function Home() {
-  return (
-    <main style={{ maxWidth: "72ch", margin: "0 auto", padding: "3rem 1.5rem" }}>
-      <p style={{ fontSize: "0.8rem", letterSpacing: "0.02em", color: "#666" }}>
-        {CREDITO}
-      </p>
-      <h1 style={{ fontSize: "2rem", marginTop: "0.5rem" }}>{APP_NAME}</h1>
-      <p style={{ color: "#444", marginTop: "0.5rem" }}>
-        F0 · esqueleto Next + dominio extraído. Expediente demo:{" "}
-        <strong>{PEDIDO.id}</strong> · {PEDIDO.producto.cajas} cajas ·{" "}
-        {PEDIDO.destino}
-      </p>
+  const t = useT();
 
-      <section style={{ marginTop: "2.5rem" }}>
-        <h2 style={{ fontSize: "1.1rem" }}>
-          Flujo del expediente ({TOTAL_ESTADOS} estados)
-        </h2>
-        <ol style={{ marginTop: "1rem", paddingLeft: "1.25rem" }}>
-          {ESTADOS.map((e) => (
-            <li key={e.key} style={{ marginBottom: "0.4rem" }}>
-              <strong>{NOMBRE_ESTADO[e.key]}</strong>{" "}
-              <span style={{ color: "#888" }}>
-                — {e.evento.hora} · {e.evento.lugar}
+  return (
+    <main className={styles.main}>
+      {/* Hero */}
+      <section className={styles.hero}>
+        <h1 className={styles.h1}>{t("tagline")}</h1>
+        <div className={styles.resumen}>
+          <p dangerouslySetInnerHTML={{ __html: t("resumen_1") }} />
+          <p dangerouslySetInnerHTML={{ __html: t("resumen_2") }} />
+          <p dangerouslySetInnerHTML={{ __html: t("resumen_3") }} />
+        </div>
+      </section>
+
+      {/* Restricciones → respuestas */}
+      <section className={styles.section}>
+        <h2 className={styles.h2}>{t("restricciones_titulo")}</h2>
+        <div className={styles.tabla}>
+          <div className={styles.colHead}>{t("restricciones_col_actual")}</div>
+          <div className={styles.colHead}>{t("restricciones_col_propuesto")}</div>
+          {RESTRICCIONES.map((n) => (
+            <div key={n} className={styles.par}>
+              <div className={`${styles.celda} ${styles.problema}`}>
+                <span className={styles.celdaT}>{t(`restriccion_${n}_t`)}</span>
+                <span className={styles.celdaS}>{t(`restriccion_${n}_s`)}</span>
+              </div>
+              <div className={`${styles.celda} ${styles.solucion}`}>
+                <span className={styles.celdaT}>{t(`solucion_${n}_t`)}</span>
+                <span className={styles.celdaS}>{t(`solucion_${n}_s`)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Flujo del expediente */}
+      <section className={styles.section}>
+        <ol className={styles.flujo}>
+          {ESTADOS.map((e, i) => (
+            <li key={e.key} className={styles.paso}>
+              <span className={styles.pasoNum}>
+                {String(i + 1).padStart(2, "0")}
               </span>
+              <span
+                className={`${styles.punto} ${
+                  TIPO_NODO[i] === "estado" ? styles.puntoEstado : styles.puntoPrivado
+                }`}
+                aria-hidden="true"
+              />
+              <span className={styles.pasoNombre}>{t(`diagrama_n${i + 1}`)}</span>
+              <span className={styles.pasoAccion}>{t(`diagrama_n${i + 1}_sub`)}</span>
             </li>
           ))}
         </ol>
+        <p className={styles.leyenda}>
+          <span className={styles.leyendaItem}>
+            <span className={`${styles.punto} ${styles.puntoEstado}`} aria-hidden="true" />
+            {t("leyenda_estado")}
+          </span>
+          <span className={styles.leyendaItem}>
+            <span className={`${styles.punto} ${styles.puntoPrivado}`} aria-hidden="true" />
+            {t("leyenda_privado")}
+          </span>
+        </p>
+        <p className={styles.banda}>{t("diagrama_banda")}</p>
       </section>
 
-      <section style={{ marginTop: "2.5rem" }}>
-        <h2 style={{ fontSize: "1.1rem" }}>Matriz de permisos por rol</h2>
-        <ul style={{ marginTop: "1rem", listStyle: "none", padding: 0 }}>
-          {ROLES.map((rol) => {
-            const visibles = Object.entries(PERMISOS[rol])
-              .filter(([, ok]) => ok)
-              .map(([campo]) => campo);
-            return (
-              <li key={rol} style={{ marginBottom: "0.75rem" }}>
-                <strong>{NOMBRE_ROL[rol]}</strong>
-                <span style={{ color: "#888" }}>
-                  {" "}
-                  — ve {visibles.length}/8 campos: {visibles.join(", ")}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-
-      <p style={{ marginTop: "3rem", fontSize: "0.85rem", color: "#999" }}>
-        Demo estático original preservado en <code>legacy/</code>. Siguiente:
-        portar i18n (ES/EN) y la capa de render por rol (F1–F2).
-      </p>
+      {/* CTA */}
+      <div className={styles.cta}>
+        <Link href="/demo" className={styles.btn}>
+          {t("cta_entrar_demo")}
+        </Link>
+      </div>
     </main>
   );
 }

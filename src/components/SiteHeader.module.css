@@ -1,0 +1,60 @@
+/* Estilo provisional (F0/F1). El sistema de diseño real llega en F3. */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #e6e6e6;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #14532d;
+  text-decoration: none;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.credito {
+  font-size: 0.78rem;
+  color: #777;
+}
+
+.langs {
+  display: inline-flex;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.lang,
+.langActive {
+  border: 0;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+  color: #555;
+}
+
+.langActive {
+  background: #14532d;
+  color: #fff;
+}
+
+@media (max-width: 560px) {
+  .credito {
+    display: none;
+  }
+}

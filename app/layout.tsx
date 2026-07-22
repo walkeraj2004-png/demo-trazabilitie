@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { I18nProvider } from "@/i18n";
+import { SiteHeader } from "@/components/SiteHeader";
 import { APP_NAME } from "@/config";
 import "./globals.css";
 
@@ -15,7 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es-EC">
-      <body>{children}</body>
+      <body>
+        <I18nProvider>
+          <SiteHeader />
+          {children}
+        </I18nProvider>
+      </body>
     </html>
   );
 }
