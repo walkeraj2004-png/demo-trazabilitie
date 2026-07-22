@@ -7,7 +7,7 @@
 /* CONFIG --------------------------------------------------------------
    BASE_URL: URL absoluta del deploy en GitHub Pages. Actualizar tras el
    primer deploy; los QR se regeneran solos al recargar la página. */
-const BASE_URL = "https://TU-USUARIO.github.io/trazaflor";
+const BASE_URL = "https://walkeraj2004-png.github.io/demo-trazabilitie/";
 
 const APP_NAME = "TrazaFlor";
 const CREDITO = APP_NAME + " · impulsado por Xpotrack";
