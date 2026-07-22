@@ -4,6 +4,7 @@
    ===================================================================== */
 import { ESTADOS, TOTAL_ESTADOS } from "@/domain";
 import { useT } from "@/i18n";
+import { HtmlText } from "@/presentation/HtmlText";
 
 export function SimBar({
   estado,
@@ -25,7 +26,7 @@ export function SimBar({
         {t("btn_reiniciar")}
       </button>
       <div id="sim-estado">
-        {t("estado_actual", { n: estado, nombre, total: TOTAL_ESTADOS })}
+        <HtmlText html={t("estado_actual", { n: estado, nombre, total: TOTAL_ESTADOS })} />
       </div>
       <button className="btn btn-avanzar" onClick={onAvanzar} disabled={!puedeAvanzar}>
         {t("btn_avanzar")}

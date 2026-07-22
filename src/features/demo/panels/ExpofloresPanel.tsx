@@ -17,6 +17,7 @@ import {
 import { useT } from "@/i18n";
 import { cx, Nuevo } from "@/presentation/ui";
 import { RoleBanner } from "../RoleBanner";
+import { HtmlText } from "@/presentation/HtmlText";
 import { BannerAlerta } from "./parts";
 
 function Kpi({
@@ -58,7 +59,9 @@ export function ExpofloresPanel({ estado }: { estado: number }) {
       <RoleBanner rol="expoflores" />
       <BannerAlerta estado={estado} />
 
-      <div className="nota-gobernanza">{t("nota_gobernanza")}</div>
+      <div className="nota-gobernanza">
+        <HtmlText html={t("nota_gobernanza")} />
+      </div>
 
       <div className="kpis">
         <Kpi valor={AGREGADOS.pedidosActivos} etiqueta={t("kpi_pedidos_activos")} />

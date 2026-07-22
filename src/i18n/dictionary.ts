@@ -210,6 +210,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     sin_etiqueta: "sin etiqueta",
     historial_titulo: "Historial del expediente",
     resumen_historial: "Ver historial completo ({n} eventos)",
+    resumen_historial_uno: "Ver historial completo (1 evento)",
 
     /* ---------- Pestaña Expoflores ---------- */
     flag_alerta_peso: "⚠ alerta de peso",
@@ -491,6 +492,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     sin_etiqueta: "no label yet",
     historial_titulo: "Case file history",
     resumen_historial: "View full history ({n} events)",
+    resumen_historial_uno: "View full history (1 event)",
 
     /* ---------- Expoflores tab ---------- */
     flag_alerta_peso: "⚠ weight alert",

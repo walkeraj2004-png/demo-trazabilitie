@@ -142,7 +142,11 @@ export function FincaPanel({ estado }: { estado: number }) {
       <div className="panel">
         <h3>{t("historial_titulo")}</h3>
         <details>
-          <summary>{t("resumen_historial", { n: log.length })}</summary>
+          <summary>
+            {log.length === 1
+              ? t("resumen_historial_uno")
+              : t("resumen_historial", { n: log.length })}
+          </summary>
           <TablaLog eventos={log} estadoActual={estado} />
         </details>
       </div>

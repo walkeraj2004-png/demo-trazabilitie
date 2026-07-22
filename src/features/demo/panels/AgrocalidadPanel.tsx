@@ -18,6 +18,7 @@ import { actorLabel } from "@/presentation/actors";
 import { hrefCaja, urlCaja } from "@/presentation/links";
 import { Qr } from "../Qr";
 import { RoleBanner } from "../RoleBanner";
+import { HtmlText } from "@/presentation/HtmlText";
 import { Campo } from "./parts";
 
 export function AgrocalidadPanel({ estado }: { estado: number }) {
@@ -82,11 +83,13 @@ export function AgrocalidadPanel({ estado }: { estado: number }) {
         {estado >= 3 ? (
           <>
             <p className="destacado">
-              {t("etiquetas_emitidas", {
-                n: 24,
-                total: p.tarifas.etiquetasTotal,
-                detalle: p.tarifas.etiquetasDetalle,
-              })}
+              <HtmlText
+                html={t("etiquetas_emitidas", {
+                  n: 24,
+                  total: p.tarifas.etiquetasTotal,
+                  detalle: p.tarifas.etiquetasDetalle,
+                })}
+              />
             </p>
             <p className="nota-recaudo">
               {t("nota_recaudo_prefix")} {t("agregados_recaudacion_dia")}
@@ -168,11 +171,13 @@ export function AgrocalidadPanel({ estado }: { estado: number }) {
           <>
             <p className="check-ok">{t("certificacion_requisito_cumplido")}</p>
             <div className="banner banner-ok">
-              {t("cfe_emitido", {
-                cfe: p.tarifas.cfe,
-                numero: p.cfe.numero,
-                ephyto: p.cfe.ephyto,
-              })}
+              <HtmlText
+                html={t("cfe_emitido", {
+                  cfe: p.tarifas.cfe,
+                  numero: p.cfe.numero,
+                  ephyto: p.cfe.ephyto,
+                })}
+              />
             </div>
             <div className="cardinalidad">
               <span>{t("cardinalidad_pedido")}</span>

@@ -10,7 +10,7 @@ import {
   buildLog,
   numeroDeEstado,
   NUM_ALERTA_ABIERTA,
-  NUM_PALETIZADO,
+  NUM_CFE_EMITIDO,
 } from "@/domain";
 import { useI18n } from "@/i18n";
 import { cx, Nuevo } from "@/presentation/ui";
@@ -38,8 +38,12 @@ export function AgenciaPanel({
   const glosa = GLOSA[lang];
   const p = PEDIDO;
   const tallosTotal = `${(p.producto.cajas * p.producto.tallosPorCaja).toLocaleString("en-US")} ${t("unidad_tallos")}`;
-  const consolidacionAutorizada = estado >= NUM_PALETIZADO;
-  const consolidacionResaltar = estado === NUM_PALETIZADO;
+  /* Bug del POC original: comparaba contra "paletizado" (estado 6), así
+     que en el estado 5 (CFE recién emitido) seguía diciendo "CFE
+     pendiente" — contradice al propio CFE que ya se ve emitido en
+     Agrocalidad. La autorización depende del CFE, no del paletizado. */
+  const consolidacionAutorizada = estado >= NUM_CFE_EMITIDO;
+  const consolidacionResaltar = estado === NUM_CFE_EMITIDO;
   const puedeEscanear = estado === NUM_ETIQUETADO;
   const logAgencia = buildLog(estado).filter(
     (e) => e.actorId === "agencia" || e.actorId === "paletizadora",

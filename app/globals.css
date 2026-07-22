@@ -905,6 +905,19 @@ details > summary:hover { color: #17466B; }
   .nuevo { animation: nuevoEntra 0.5s ease; }
 }
 
+/* Excepción: cuando ".nuevo" cae sobre un panel entero (una tarjeta
+   grande), llenarlo de ámbar se lee como un estado de error, no como
+   "esto es nuevo". Se reemplaza por un acento superior discreto; los
+   elementos pequeños dentro (campo, fila, kpi, badge) conservan el
+   resaltado fuerte de arriba. */
+.panel.nuevo {
+  background: #fff;
+  border-left: none;
+  border-top: 3px solid #BA7517;
+  border-radius: 12px;
+  font-weight: inherit;
+}
+
 @keyframes nuevoEntra {
   from { opacity: 0.35; transform: translateX(-4px); }
   to { opacity: 1; transform: translateX(0); }
