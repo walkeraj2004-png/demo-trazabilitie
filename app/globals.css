@@ -32,6 +32,22 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Foco de teclado consistente en todo el sistema. Antes solo existía en
+   .nodo-btn (la barra de progreso); todo lo demás (pestañas, pills de
+   sub-nav, botones, selector de idioma, tarjetas de caja) dependía del
+   outline por defecto del navegador — inconsistente entre navegadores y
+   a veces invisible sobre un fondo de color sólido. El offset deja ver
+   el fondo de la página antes del anillo, así que se distingue incluso
+   sobre una pestaña activa ya pintada de navy. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 html { font-size: 17px; }
 
 body {
