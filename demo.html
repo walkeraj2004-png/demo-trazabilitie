@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es-EC">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="titulo_demo">TrazaFlor · Demo — pedido PED-2026-0417</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="demo">
+
+  <header class="header">
+    <a class="brand" href="index.html"><img src="assets/logo-icon.png" alt="" class="brand-icon" width="512" height="512">TrazaFlor</a>
+    <span class="credito" data-i18n="credito">TrazaFlor · impulsado por Xpotrack</span>
+  </header>
+
+  <div class="simbar">
+    <button id="btn-reiniciar" class="btn btn-reiniciar" data-i18n="btn_reiniciar">◀ Reiniciar</button>
+    <div id="sim-estado">Estado actual: 1 de 9</div>
+    <button id="btn-avanzar" class="btn btn-avanzar" data-i18n="btn_avanzar">Avanzar simulación ▶</button>
+  </div>
+
+  <div class="progreso-wrap">
+    <ol id="progreso"></ol>
+    <p class="progreso-nota" data-i18n="progreso_nota">Datos de estado provistos por Xpotrack</p>
+  </div>
+
+  <nav class="tabs" aria-label="Vistas por rol" data-i18n-attr="aria-label:nav_tabs_aria">
+    <button data-tab="finca"><span data-i18n="tab_finca">Finca · El Rosal</span><span class="punto-cambio" id="punto-finca" aria-hidden="true" data-i18n-attr="aria-label:aria_cambios_sin_ver"></span></button>
+    <button data-tab="expoflores"><span>Expoflores</span><span class="punto-cambio" id="punto-expoflores" aria-hidden="true" data-i18n-attr="aria-label:aria_cambios_sin_ver"></span></button>
+    <button data-tab="agencia"><span data-i18n="tab_agencia">Agencia de carga</span><span class="punto-cambio" id="punto-agencia" aria-hidden="true" data-i18n-attr="aria-label:aria_cambios_sin_ver"></span></button>
+    <button data-tab="agrocalidad"><span>Agrocalidad</span><span class="punto-cambio" id="punto-agrocalidad" aria-hidden="true" data-i18n-attr="aria-label:aria_cambios_sin_ver"></span></button>
+  </nav>
+
+  <main>
+    <section id="tab-finca" class="tab-panel" aria-label="Vista de la finca" data-i18n-attr="aria-label:aria_vista_finca"></section>
+    <section id="tab-expoflores" class="tab-panel" aria-label="Vista de Expoflores" data-i18n-attr="aria-label:aria_vista_expoflores"></section>
+    <section id="tab-agencia" class="tab-panel" aria-label="Vista de la agencia de carga" data-i18n-attr="aria-label:aria_vista_agencia"></section>
+    <section id="tab-agrocalidad" class="tab-panel" aria-label="Vista de Agrocalidad" data-i18n-attr="aria-label:aria_vista_agrocalidad"></section>
+  </main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="data.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
