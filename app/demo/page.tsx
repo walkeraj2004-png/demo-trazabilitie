@@ -1,10 +1,9 @@
 "use client";
 /* =====================================================================
-   TrazaFlor · pantalla del demo (rediseñada)
-   Flujo legible de arriba abajo para un comprador no técnico:
-     controles → viaje (9 pasos) → relato del paso en lenguaje simple →
-     lente de rol (quién ve qué) → el expediente por esa lente.
-   Anclada en Agrocalidad (autoridad). El estado vive en useDemoState.
+   TrazaFlor · pantalla del demo
+   Demo funcional con data hardcodeada: barra de simulación, progreso
+   navegable, pestañas por rol y el expediente que se llena y resalta al
+   avanzar. Arranca en Finca (expediente completo visible desde el paso 1).
    ===================================================================== */
 import { useEffect } from "react";
 import { PEDIDO } from "@/domain";
@@ -12,8 +11,7 @@ import { useI18n } from "@/i18n";
 import { useDemoState } from "@/features/demo/useDemoState";
 import { SimBar } from "@/features/demo/SimBar";
 import { Progreso } from "@/features/demo/Progreso";
-import { StepStory } from "@/features/demo/StepStory";
-import { LensBar } from "@/features/demo/LensBar";
+import { TabsNav } from "@/features/demo/TabsNav";
 import { Toast } from "@/features/demo/Toast";
 import { FincaPanel } from "@/features/demo/panels/FincaPanel";
 import { ExpofloresPanel } from "@/features/demo/panels/ExpofloresPanel";
@@ -47,9 +45,7 @@ export default function DemoPage() {
 
       <Progreso estado={s.estado} onIr={s.irA} />
 
-      <StepStory estado={s.estado} />
-
-      <LensBar
+      <TabsNav
         estado={s.estado}
         activa={s.tab}
         vistas={s.vistas}
@@ -57,7 +53,6 @@ export default function DemoPage() {
       />
 
       <main>
-        {/* key = lente + paso → dispara el crossfade al cambiar cualquiera */}
         <section
           className={`tab-panel visible ${swap.swap}`}
           key={`${s.tab}-${s.estado}`}

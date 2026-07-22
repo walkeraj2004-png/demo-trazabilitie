@@ -43,8 +43,9 @@ export interface DemoState {
 export function useDemoState(): DemoState {
   const t = useT();
   const [estado, setEstado] = useState(1);
-  // Ancla del demo: la autoridad (vista héroe). Persistencia puede sobrescribir.
-  const [tab, setTab] = useState<Rol>("agrocalidad");
+  // Arranca en Finca: es la única vista con el expediente completo desde el
+  // paso 1 (data visible de inmediato). Persistencia puede sobrescribir.
+  const [tab, setTab] = useState<Rol>("finca");
   const [vistas, setVistas] = useState<readonly Rol[]>([]);
   const [toastMsg, setToastMsg] = useState("");
 
