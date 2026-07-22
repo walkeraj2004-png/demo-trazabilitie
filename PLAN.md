@@ -61,8 +61,14 @@ Justificación (no es moda):
 - [x] F0 · scaffold Next 16 + TS (build y typecheck en verde)
 - [x] F0 · dominio extraído a TS puro tipado (`src/domain/*`)
 - [x] F0 · legacy preservado en `legacy/`
-- [ ] F0 · portar i18n (ES/EN) desde `legacy/i18n.js` ← **siguiente**
-- [ ] F1 · endpoint de fusión + prueba vendible
+- [x] F0 · i18n portado (ES/EN): `t()` pura + provider React SSR-safe + toggle
+- [x] F2 (adelanto) · landing reconstruida como pantalla React (`/`)
+- [ ] F1 · pantalla del demo: vistas por rol + simulación + avance por escaneo ← **en curso**
+- [ ] F1 · endpoint de fusión (Xpotrack/courier) + prueba vendible
+
+### Cómo ver el avance
+- Local: http://localhost:3000  ·  Teléfono (misma WiFi): http://192.168.0.164:3000
+- `npm run dev` corriendo con hot-reload (task bmff2hr7t).
 
 ### Notas de seguridad (F4, registradas ya)
 - next@15.1.6 tenía CVE crítico (CVE-2025-66478) → resuelto subiendo a 16.2.11.

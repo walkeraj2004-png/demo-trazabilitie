@@ -1,32 +1,933 @@
-/* Reset mínimo. El sistema de diseño real (tokens, tipografía, color)
-   llega en F3 — aquí solo lo indispensable para que F0 sea legible. */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* =====================================================================
+   TrazaFlor · style.css
+   Paleta: azul oscuro #1F5C8B · azul claro #7FA8C9 · verde #1D9E75
+   coral #D85A30 · fondo blanco. Pensado para proyectar (cuerpo ≥16px).
+   ===================================================================== */
+
+:root {
+  --azul: #1F5C8B;
+  --azul-claro: #7FA8C9;
+  --azul-fondo: #EEF4F9;
+  --verde: #1D9E75;
+  --verde-fondo: #E4F5EE;
+  --coral: #D85A30;
+  --coral-fondo: #FCEDE6;
+  --gris: #6B7684;
+  --gris-borde: #D9E0E7;
+  --gris-fondo: #F5F7F9;
+  --tinta: #22303C;
 }
 
-* {
-  margin: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-  -webkit-text-size-adjust: 100%;
-}
+html { font-size: 17px; }
 
 body {
-  min-height: 100dvh;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  font-family:
-    system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #1a1a1a;
-  background: #fafafa;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--tinta);
+  background: #fff;
+  line-height: 1.55;
 }
 
-img,
-picture,
-svg {
+a { color: var(--azul); }
+
+/* ---------- header ---------- */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.9rem 1.5rem;
+  border-bottom: 3px solid var(--azul);
+  background: #fff;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--azul);
+  text-decoration: none;
+}
+
+.brand-icon { width: 32px; height: 32px; }
+
+.credito { color: var(--gris); font-size: 0.95rem; }
+
+/* ---------- interruptor de idioma ---------- */
+
+.lang-switch {
+  display: flex;
+  border: 1px solid var(--gris-borde);
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.lang-btn {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  border: none;
+  background: transparent;
+  color: var(--gris);
+  padding: 0.5rem 0.9rem;
+  min-height: 40px;
+  min-width: 44px;
+  cursor: pointer;
+}
+
+.lang-btn + .lang-btn { border-left: 1px solid var(--gris-borde); }
+
+.lang-btn.activo { background: var(--azul); color: #fff; }
+
+/* ---------- landing ---------- */
+
+.hero { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem 2rem; text-align: center; }
+
+.hero h1 { font-size: 3rem; color: var(--azul); letter-spacing: -0.02em; }
+
+.hero-logo { margin: 0 0 0.5rem; }
+
+.hero-logo img { width: 100%; max-width: 300px; height: auto; }
+
+.tagline { font-size: 1.35rem; color: var(--tinta); margin-top: 0.6rem; }
+
+.resumen {
+  max-width: 720px;
+  margin: 1.8rem auto 0;
+  text-align: left;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.resumen p {
+  padding-left: 1rem;
+  border-left: 4px solid var(--azul-claro);
+}
+
+/* ---------- Restricciones → soluciones (sobrio, mismo lenguaje que
+   el diagrama de proceso) ----------
+   Dos columnas + regla vertical hairline; única marca de color es la
+   barra terracota de cada problema. Se apila en móvil. */
+.restricciones { max-width: 840px; margin: 2.6rem auto 0; padding: 0 1.5rem; }
+
+.restricciones h2 { color: var(--azul); margin-bottom: 0.4rem; }
+
+.restricciones-tabla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2.5rem;
+  row-gap: 0;
+  position: relative;
+  margin-top: 1.6rem;
+}
+
+.restricciones-tabla::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: #D8D6CF;
+}
+
+.restricciones-encabezado {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gris);
+  padding-bottom: 0.7rem;
+}
+
+.restricciones-regla { grid-column: 1 / -1; border-top: 1px solid #D8D6CF; margin-bottom: 1.3rem; }
+
+.restricciones-par { display: contents; }
+
+.restricciones-celda { padding-bottom: 1.3rem; min-width: 0; }
+
+.restricciones-problema { border-left: 3px solid #C4522B; padding-left: 0.9rem; }
+
+.restricciones-solucion { padding-left: calc(0.9rem + 3px); }
+
+.restricciones-celda-t { display: block; font-weight: 500; color: #17456B; font-size: 14.5px; line-height: 1.25; }
+
+.restricciones-celda-s { display: block; margin-top: 2px; font-size: 12.5px; font-weight: 400; color: #73726C; line-height: 1.3; }
+
+/* Régimen móvil (<700px): cada par se apila, problema sobre solución. */
+@media (max-width: 699px) {
+  .restricciones-tabla::before { display: none; }
+  .restricciones-encabezado, .restricciones-regla { display: none; }
+  .restricciones-par { display: flex; flex-direction: column; margin-bottom: 1.6rem; }
+  .restricciones-par:last-child { margin-bottom: 0; }
+  .restricciones-celda { padding-bottom: 0; }
+  .restricciones-solucion { margin-top: 0.7rem; }
+}
+
+/* ---------- Diagrama de proceso (sobrio, institucional) ----------
+   Nueve pasos numerados 01–09 sobre una línea hairline. Sin cajas, sin
+   rellenos, sin flechas: la ÚNICA distinción cromática es el marcador —
+   relleno navy para pasos del Estado (02,03,05,07,09), hueco para actores
+   privados (01,04,06,08)—. Tres regímenes: 1 fila ≥1300px (base), 2 filas
+   5+4 entre 700–1299px, columna vertical <700px. */
+.diagrama { max-width: 1220px; margin: 2.6rem auto 0; padding: 0 1.5rem; }
+
+/* Base = una sola fila de 9 (pantallas anchas ≥1300px). */
+.flujo-pasos {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  row-gap: 1.9rem;
+}
+
+.paso {
+  position: relative;
+  display: grid;
+  grid-template-rows: 20px 14px auto auto;
+  grid-template-areas: "num" "dot" "name" "act";
+  justify-items: center;
+  text-align: center;
+  padding: 0 0.8rem;          /* ≥24px de separación entre textos vecinos */
+  min-width: 0;
+}
+
+/* Hairline de 1px que cruza el centro de los marcadores de la fila.
+   top = alto fila num (20px) + mitad fila dot (7px) = 27px. */
+.paso::before {
+  content: "";
+  position: absolute;
+  top: 26.5px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #D8D6CF;
+  z-index: 0;
+}
+/* Extremos de la fila: la línea empieza y termina en el centro del marcador. */
+.paso:first-child::before { left: 50%; }
+.paso:last-child::before  { right: 50%; }
+
+.paso-num {
+  grid-area: num;
+  font-size: 11.5px;
+  line-height: 20px;
+  color: #9C9A92;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+}
+
+.paso-punto {
+  grid-area: dot;
+  align-self: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;                 /* el marcador tapa la línea que pasa por detrás */
+}
+.paso-punto.es-estado  { background: #17456B; border: 1.5px solid #17456B; }
+.paso-punto.es-privado { background: #fff;    border: 1.5px solid #17456B; }
+
+.paso-nombre {
+  grid-area: name;
+  margin-top: 11px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #17456B;
+  line-height: 1.25;
+}
+
+.paso-accion {
+  grid-area: act;
+  margin-top: 2px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #73726C;
+  line-height: 1.3;
+}
+
+/* Leyenda: una línea centrada con los marcadores reales renderizados. */
+.flujo-leyenda {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  margin-top: 1.7rem;
+  font-size: 11.5px;
+  color: #73726C;
+}
+.flujo-leyenda .leyenda-item { display: inline-flex; align-items: center; gap: 0.42rem; }
+.flujo-leyenda .paso-punto { position: static; }
+
+/* Barra inferior: regla hairline + una línea de texto quieta y centrada. */
+.flujo-pie {
+  border-top: 1px solid #D8D6CF;
+  margin-top: 1.7rem;
+  padding-top: 0.95rem;
+  text-align: center;
+}
+.flujo-pie p { font-size: 13px; color: #9C9A92; line-height: 1.4; }
+
+/* Régimen medio (700–1299px): dos filas, 5 arriba y 4 abajo centradas. */
+@media (min-width: 700px) and (max-width: 1299px) {
+  .diagrama { max-width: 1000px; }
+  .flujo-pasos { grid-template-columns: repeat(10, 1fr); row-gap: 2.1rem; }
+  .paso:nth-child(1) { grid-column: 1 / span 2; grid-row: 1; }
+  .paso:nth-child(2) { grid-column: 3 / span 2; grid-row: 1; }
+  .paso:nth-child(3) { grid-column: 5 / span 2; grid-row: 1; }
+  .paso:nth-child(4) { grid-column: 7 / span 2; grid-row: 1; }
+  .paso:nth-child(5) { grid-column: 9 / span 2; grid-row: 1; }
+  .paso:nth-child(6) { grid-column: 2 / span 2; grid-row: 2; }
+  .paso:nth-child(7) { grid-column: 4 / span 2; grid-row: 2; }
+  .paso:nth-child(8) { grid-column: 6 / span 2; grid-row: 2; }
+  .paso:nth-child(9) { grid-column: 8 / span 2; grid-row: 2; }
+  /* extremos de cada fila (1 y 9 ya vienen recortados por :first/:last-child) */
+  .paso:nth-child(5)::before { right: 50%; }
+  .paso:nth-child(6)::before { left: 50%; }
+}
+
+/* Régimen móvil (<700px): columna vertical, línea a la izquierda, texto a la derecha. */
+@media (max-width: 699px) {
+  .diagrama { max-width: 460px; padding: 0 1.2rem; }
+  .flujo-pasos { grid-template-columns: 1fr; row-gap: 0; }
+
+  .paso {
+    grid-template-columns: 20px 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "dot num"
+      "dot name"
+      "dot act";
+    justify-items: start;
+    text-align: left;
+    column-gap: 0.9rem;
+    padding: 0.55rem 0;
+  }
+
+  .paso-num { line-height: 1.3; }
+  .paso .paso-punto { justify-self: center; align-self: start; margin-top: 0.25rem; }
+  .paso-nombre { margin-top: 2px; }
+
+  /* la hairline pasa a vertical por el centro del carril de 20px */
+  .paso::before {
+    top: 0;
+    bottom: 0;
+    left: 9.5px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+  .paso:first-child::before { top: 17px; }             /* arranca en el 1er marcador */
+  .paso:last-child::before  { bottom: auto; height: 17px; }  /* termina en el último */
+}
+
+.cta { text-align: center; margin: 2.5rem 0; }
+
+.btn-grande {
+  display: inline-block;
+  background: var(--azul);
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 1rem 2.6rem;
+  border-radius: 10px;
+}
+
+.btn-grande:hover { background: #17466B; }
+
+.escaneame {
+  max-width: 900px;
+  margin: 0 auto 3.5rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: var(--gris-fondo);
+  border-radius: 14px;
+}
+
+.escaneame h2 { color: var(--azul); margin-bottom: 0.4rem; }
+
+.escaneame .qr-slot { display: inline-block; margin-top: 1.2rem; padding: 14px; background: #fff; border: 1px solid var(--gris-borde); border-radius: 10px; }
+
+/* ---------- guía de uso (index) ----------
+   Colapsable, cerrada por defecto. Cada fila = un ejemplo visual real
+   (reutiliza clases del demo) + una explicación. El andamiaje es propio;
+   los chips de ejemplo conservan las clases del demo intactas. */
+
+.guia { max-width: 900px; margin: 0 auto 3rem; padding: 0 1.5rem; }
+
+.guia > details {
+  border: 1px solid var(--gris-borde);
+  border-radius: 14px;
+  background: var(--gris-fondo);
+  padding: 0.5rem 1.3rem 0.8rem;
+}
+
+.guia > details > summary { font-size: 1.15rem; padding: 0.6rem 0; }
+
+.guia-fila {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--gris-borde);
+}
+
+.guia-fila:first-child { border-top: none; }
+
+.guia-ejemplo {
+  flex: 0 0 120px;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.guia-texto { flex: 1; margin: 0; font-size: 0.98rem; }
+
+.guia-cierre {
+  margin: 0.4rem 0 0.2rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--gris-borde);
+  font-size: 0.95rem;
+  color: var(--gris);
+}
+
+/* mini barra de progreso: sin línea conectora, dispuesta en fila */
+.guia-nodos { list-style: none; display: flex; align-items: center; gap: 0.4rem; }
+
+/* los contenedores del demo usados como ejemplo pierden su espaciado de
+   página para caber en la celda de 120px; los chips no cambian de aspecto */
+.guia-ejemplo .tabs { margin: 0; padding: 0; }
+
+.guia-ejemplo .campo { width: 100%; }
+
+.guia-ejemplo .banner { width: 100%; margin: 0; font-size: 0.82rem; padding: 0.5rem 0.65rem; }
+
+/* ---------- barra de simulación ---------- */
+
+.simbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  padding: 0.65rem 1.5rem;
+  background: var(--azul);
+  color: #fff;
+}
+
+#sim-estado { font-size: 1rem; }
+
+.btn {
+  font: inherit;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-pri { background: var(--verde); color: #fff; }
+
+.btn-sec { background: var(--gris-fondo); color: var(--tinta); border: 1px solid var(--gris-borde); }
+
+.simbar .btn-avanzar { background: var(--verde); color: #fff; font-size: 1.05rem; }
+
+.simbar .btn-reiniciar { background: rgba(255,255,255,0.15); color: #fff; }
+
+/* ---------- barra de progreso ---------- */
+
+.progreso-wrap { padding: 1.2rem 1.5rem 0.4rem; background: #fff; border-bottom: 1px solid var(--gris-borde); }
+
+#progreso {
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#progreso li {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  padding: 0 0.2rem;
+}
+
+#progreso li::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: -50%;
+  width: 100%;
+  height: 3px;
+  background: var(--gris-borde);
+}
+
+#progreso li:first-child::before { display: none; }
+
+#progreso li.hecho::before { background: var(--verde); }
+
+#progreso li.actual::before { background: var(--verde); }
+
+.nodo {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-weight: 700;
+  background: var(--gris-fondo);
+  color: var(--gris);
+  border: 2px solid var(--gris-borde);
+}
+
+li.hecho .nodo { background: var(--verde); border-color: var(--verde); color: #fff; }
+
+li.actual .nodo { background: var(--azul); border-color: var(--azul); color: #fff; box-shadow: 0 0 0 5px var(--azul-fondo); }
+
+.nodo-label { display: block; font-size: 0.78rem; margin-top: 0.45rem; color: var(--gris); line-height: 1.25; }
+
+li.actual .nodo-label { color: var(--azul); font-weight: 700; }
+
+li.hecho .nodo-label { color: var(--verde); }
+
+/* Nodo clickeable: reset de <button> nativo, conserva el look de .nodo /
+   .nodo-label (estilos por .hecho/.actual/pendiente sin cambios). */
+.nodo-btn {
   display: block;
-  max-width: 100%;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 4px;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.nodo-btn:hover .nodo { filter: brightness(0.93); }
+
+li.actual .nodo-btn { cursor: default; }
+
+li.actual .nodo-btn:hover .nodo { filter: none; }
+
+.nodo-btn:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 2px;
+}
+
+.progreso-nota { text-align: center; font-size: 0.8rem; color: var(--gris); padding: 0.5rem 0 0.2rem; }
+
+/* ---------- pestañas ---------- */
+
+.tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 1.1rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.tabs button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--gris-borde);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  background: var(--gris-fondo);
+  color: var(--gris);
+  cursor: pointer;
+}
+
+.tabs button.activa { background: var(--azul); color: #fff; border-color: var(--azul); }
+
+/* Punto de "cambios sin ver" — 8px, mismo ámbar que .nuevo. El espacio se
+   reserva siempre (visibility, no display) para que la pestaña no cambie
+   de ancho al aparecer o desaparecer. */
+.punto-cambio {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: #BA7517;
+  vertical-align: middle;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.punto-cambio.visible { opacity: 1; visibility: visible; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .punto-cambio.visible { animation: puntoCambioAparece 0.35s ease; }
+}
+
+@keyframes puntoCambioAparece {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+main { max-width: 1200px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
+
+.tab-panel { display: none; }
+
+.tab-panel.visible { display: block; }
+
+/* ---------- paneles y campos ---------- */
+
+.panel {
+  border: 1px solid var(--gris-borde);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.2rem;
+  background: #fff;
+}
+
+.panel h2 { color: var(--azul); font-size: 1.3rem; }
+
+.panel h3 { color: var(--azul); font-size: 1.1rem; margin-bottom: 0.7rem; }
+
+.panel-cabecera { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+
+.panel-compacto { background: var(--gris-fondo); }
+
+.campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.7rem 1.6rem; }
+
+.campos-linea { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+.campo { display: flex; flex-direction: column; }
+
+.campo-k { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gris); }
+
+.campo-v { font-weight: 600; }
+
+.oculto { color: var(--gris); font-weight: 500; font-style: italic; }
+
+.dato-alerta { color: var(--coral); font-weight: 700; }
+
+.vacio { color: var(--gris); font-style: italic; }
+
+.pendiente-doc { color: var(--gris); }
+
+/* ---------- banners y notas ---------- */
+
+.banner { padding: 0.85rem 1.1rem; border-radius: 10px; margin-bottom: 1.1rem; font-size: 1.02rem; }
+
+.banner-alerta { background: var(--coral-fondo); border: 1px solid var(--coral); color: #8C3213; }
+
+.banner-ok { background: var(--verde-fondo); border: 1px solid var(--verde); color: #0F6B4E; }
+
+.nota-gobernanza {
+  background: var(--azul-fondo);
+  border: 1px solid var(--azul-claro);
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.1rem;
+}
+
+.nota-tabla { font-size: 0.85rem; color: var(--gris); margin-top: 0.6rem; }
+
+.nota-recaudo { font-size: 0.92rem; color: var(--gris); margin: 0.3rem 0 0.7rem; }
+
+.destacado { font-size: 1.05rem; }
+
+.tag, .tag-coral {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 20px;
+  padding: 0.15rem 0.65rem;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+}
+
+.tag { background: var(--azul-fondo); color: var(--azul); }
+
+.tag-coral { background: var(--coral-fondo); color: var(--coral); }
+
+/* ---------- KPIs (Expoflores) ---------- */
+
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.2rem; }
+
+.kpi {
+  background: var(--azul-fondo);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-valor { font-size: 1.9rem; font-weight: 700; color: var(--azul); }
+
+.kpi-etiqueta { font-size: 0.85rem; color: var(--gris); }
+
+.kpi-alerta { background: var(--coral-fondo); }
+
+.kpi-alerta .kpi-valor { color: var(--coral); }
+
+.flag { color: var(--gris); }
+
+.flag-alerta { color: var(--coral); font-weight: 700; }
+
+.flag-ok { color: var(--verde); font-weight: 600; }
+
+/* ---------- tablas ---------- */
+
+.tabla { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+
+.tabla th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gris);
+  border-bottom: 2px solid var(--gris-borde);
+  padding: 0.45rem 0.6rem;
+}
+
+.tabla td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--gris-fondo); vertical-align: top; }
+
+.fila-alerta td { background: var(--coral-fondo); }
+
+.fila-ok td { background: var(--verde-fondo); }
+
+/* ---------- cajas y QRs ---------- */
+
+.grid-cajas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  gap: 0.9rem;
+}
+
+.grid-cajas-chica { margin-top: 0.8rem; }
+
+.caja-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.7rem 0.4rem;
+  border: 1px solid var(--gris-borde);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--tinta);
+  background: #fff;
+}
+
+.caja-card:hover { border-color: var(--azul); }
+
+.caja-id { font-size: 0.8rem; font-weight: 700; color: var(--azul); }
+
+.caja-etq { font-size: 0.72rem; color: var(--gris); }
+
+.qr-slot img, .qr-slot canvas { display: block; }
+
+.qr-fallback { font-size: 0.7rem; color: var(--gris); text-align: center; }
+
+/* ---------- checks Agrocalidad ---------- */
+
+.checks { list-style: none; display: grid; gap: 0.45rem; }
+
+.check-ok { color: #0F6B4E; font-weight: 600; }
+
+.check-hora { color: var(--gris); font-weight: 400; font-size: 0.82rem; margin-left: 0.4rem; }
+
+.cardinalidad {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  font-weight: 700;
+  color: var(--azul);
+}
+
+.cardinalidad span:not(.flecha) {
+  background: var(--azul-fondo);
+  border-radius: 10px;
+  padding: 0.5rem 1.1rem;
+}
+
+.cardinalidad .flecha { color: var(--gris); }
+
+/* ---------- documentos ---------- */
+
+.docs { list-style: none; display: grid; gap: 0.45rem; }
+
+/* ---------- secciones colapsables ---------- */
+
+details { margin-top: 0.3rem; }
+
+details > summary {
+  list-style: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--azul);
+  padding: 0.3rem 0;
+}
+
+details > summary::-webkit-details-marker { display: none; }
+
+details > summary::before {
+  content: "▸";
+  display: inline-block;
+  width: 1em;
+  margin-right: 0.4rem;
+  color: var(--azul-claro);
+}
+
+details[open] > summary::before { content: "▾"; }
+
+details[open] > summary { margin-bottom: 0.7rem; }
+
+details > summary:hover { color: #17466B; }
+
+/* ---------- resaltado de cambios recientes ----------
+   Una sola clase reutilizable (.nuevo) + una etiqueta de texto (.nuevo-tag).
+   Se deriva del estado actual en cada render — no hay temporizadores. */
+
+.nuevo {
+  background: #FAEEDA;
+  border-left: 3px solid #BA7517;
+  border-radius: 0 8px 8px 0;
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nuevo { animation: nuevoEntra 0.5s ease; }
+}
+
+@keyframes nuevoEntra {
+  from { opacity: 0.35; transform: translateX(-4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.nuevo-tag {
+  display: inline-block;
+  background: #BA7517;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.08rem 0.5rem;
+  border-radius: 20px;
+  vertical-align: middle;
+  margin-left: 0.35rem;
+}
+
+/* filas de tabla: el fondo se pinta en las celdas, no en el <tr> */
+tr.nuevo { background: transparent; }
+
+tr.nuevo td { background: #FAEEDA; font-weight: 600; }
+
+tr.nuevo td:first-child { border-left: 3px solid #BA7517; }
+
+/* sobre fondos de color existentes (alerta/resuelta), conservar el color
+   y usar solo el borde izquierdo + peso de fuente para marcar "nuevo" */
+.fila-alerta.nuevo td { background: var(--coral-fondo); }
+
+.fila-ok.nuevo td { background: var(--verde-fondo); }
+
+.banner-alerta.nuevo { background: var(--coral-fondo); }
+
+.banner-ok.nuevo { background: var(--verde-fondo); }
+
+/* ---------- toast ---------- */
+
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.6rem;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--tinta);
+  color: #fff;
+  padding: 0.8rem 1.4rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  max-width: min(640px, 90vw);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 100;
+  text-align: center;
+}
+
+#toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---------- página de caja (móvil primero) ---------- */
+
+.caja-main { max-width: 520px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+
+.caja-pedido { font-size: 0.85rem; color: var(--gris); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.timeline { list-style: none; position: relative; padding-left: 1.4rem; }
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: var(--azul-claro);
+  border-radius: 2px;
+}
+
+.timeline li { position: relative; padding: 0 0 1.1rem 0.6rem; display: flex; flex-direction: column; }
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -1.4rem;
+  top: 6px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--azul);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--azul);
+}
+
+.timeline li.tl-hito::before { background: var(--verde); box-shadow: 0 0 0 2px var(--verde); }
+
+.tl-hora { font-size: 0.8rem; color: var(--gris); font-weight: 700; }
+
+.tl-accion { font-weight: 600; }
+
+.tl-meta { font-size: 0.85rem; color: var(--gris); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 760px) {
+  html { font-size: 16px; }
+  .hero h1 { font-size: 2.2rem; }
+  .nodo-label { display: none; }
+  #progreso li.actual .nodo-label { display: block; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+  .progreso-wrap { padding-bottom: 2rem; }
+  .tabla { display: block; overflow-x: auto; }
 }

@@ -2,90 +2,88 @@
 import Link from "next/link";
 import { useT } from "@/i18n";
 import { ESTADOS } from "@/domain";
-import styles from "./page.module.css";
 
-/* Tipo visual de cada nodo del flujo (estado del sistema vs actor privado).
-   Derivado de la posición en la máquina de estados, no escrito a mano. */
-const TIPO_NODO: ("estado" | "privado")[] = ESTADOS.map((_, i) =>
-  [0, 3, 5, 7].includes(i) ? "privado" : "estado",
-);
-
+/* Tipo visual de cada nodo del flujo, derivado de la posición en la
+   máquina de estados: relleno navy = paso del Estado; hueco = actor
+   privado (mismo criterio que el diagrama institucional del POC). */
+const ES_PRIVADO = new Set([0, 3, 5, 7]);
 const RESTRICCIONES = [1, 2, 3, 4, 5, 6] as const;
 
 export default function Home() {
   const t = useT();
 
   return (
-    <main className={styles.main}>
-      {/* Hero */}
-      <section className={styles.hero}>
-        <h1 className={styles.h1}>{t("tagline")}</h1>
-        <div className={styles.resumen}>
+    <>
+      <section className="hero">
+        <h1 className="hero-logo">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/assets/logo-completo.png" alt="TrazaFlor" width={640} height={708} />
+        </h1>
+        <p className="tagline">{t("tagline")}</p>
+        <div className="resumen">
           <p dangerouslySetInnerHTML={{ __html: t("resumen_1") }} />
           <p dangerouslySetInnerHTML={{ __html: t("resumen_2") }} />
           <p dangerouslySetInnerHTML={{ __html: t("resumen_3") }} />
         </div>
       </section>
 
-      {/* Restricciones → respuestas */}
-      <section className={styles.section}>
-        <h2 className={styles.h2}>{t("restricciones_titulo")}</h2>
-        <div className={styles.tabla}>
-          <div className={styles.colHead}>{t("restricciones_col_actual")}</div>
-          <div className={styles.colHead}>{t("restricciones_col_propuesto")}</div>
+      <section className="restricciones" aria-label={t("restricciones_aria")}>
+        <h2>{t("restricciones_titulo")}</h2>
+        <div className="restricciones-tabla">
+          <div className="restricciones-encabezado">{t("restricciones_col_actual")}</div>
+          <div className="restricciones-encabezado">{t("restricciones_col_propuesto")}</div>
+          <div className="restricciones-regla" aria-hidden="true" />
           {RESTRICCIONES.map((n) => (
-            <div key={n} className={styles.par}>
-              <div className={`${styles.celda} ${styles.problema}`}>
-                <span className={styles.celdaT}>{t(`restriccion_${n}_t`)}</span>
-                <span className={styles.celdaS}>{t(`restriccion_${n}_s`)}</span>
+            <div className="restricciones-par" key={n}>
+              <div className="restricciones-celda restricciones-problema">
+                <span className="restricciones-celda-t">{t(`restriccion_${n}_t`)}</span>
+                <span className="restricciones-celda-s">{t(`restriccion_${n}_s`)}</span>
               </div>
-              <div className={`${styles.celda} ${styles.solucion}`}>
-                <span className={styles.celdaT}>{t(`solucion_${n}_t`)}</span>
-                <span className={styles.celdaS}>{t(`solucion_${n}_s`)}</span>
+              <div className="restricciones-celda restricciones-solucion">
+                <span className="restricciones-celda-t">{t(`solucion_${n}_t`)}</span>
+                <span className="restricciones-celda-s">{t(`solucion_${n}_s`)}</span>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Flujo del expediente */}
-      <section className={styles.section}>
-        <ol className={styles.flujo}>
+      <section className="diagrama" aria-label={t("diagrama_aria")}>
+        <ol className="flujo-pasos">
           {ESTADOS.map((e, i) => (
-            <li key={e.key} className={styles.paso}>
-              <span className={styles.pasoNum}>
-                {String(i + 1).padStart(2, "0")}
-              </span>
+            <li className="paso" key={e.key}>
+              <span className="paso-num">{String(i + 1).padStart(2, "0")}</span>
               <span
-                className={`${styles.punto} ${
-                  TIPO_NODO[i] === "estado" ? styles.puntoEstado : styles.puntoPrivado
-                }`}
+                className={`paso-punto ${ES_PRIVADO.has(i) ? "es-privado" : "es-estado"}`}
                 aria-hidden="true"
               />
-              <span className={styles.pasoNombre}>{t(`diagrama_n${i + 1}`)}</span>
-              <span className={styles.pasoAccion}>{t(`diagrama_n${i + 1}_sub`)}</span>
+              <span className="paso-nombre">{t(`diagrama_n${i + 1}`)}</span>
+              <span className="paso-accion">{t(`diagrama_n${i + 1}_sub`)}</span>
             </li>
           ))}
         </ol>
-        <p className={styles.leyenda}>
-          <span className={styles.leyendaItem}>
-            <span className={`${styles.punto} ${styles.puntoEstado}`} aria-hidden="true" />
-            {t("leyenda_estado")}
+
+        <p className="flujo-leyenda">
+          <span className="leyenda-item">
+            <span className="paso-punto es-estado" aria-hidden="true" />
+            <span>{t("leyenda_estado")}</span>
           </span>
-          <span className={styles.leyendaItem}>
-            <span className={`${styles.punto} ${styles.puntoPrivado}`} aria-hidden="true" />
-            {t("leyenda_privado")}
+          <span className="leyenda-item">
+            <span className="paso-punto es-privado" aria-hidden="true" />
+            <span>{t("leyenda_privado")}</span>
           </span>
         </p>
-        <p className={styles.banda}>{t("diagrama_banda")}</p>
+
+        <div className="flujo-pie">
+          <p>{t("diagrama_banda")}</p>
+        </div>
       </section>
 
-      {/* CTA */}
-      <div className={styles.cta}>
-        <Link href="/demo" className={styles.btn}>
+      <div className="cta">
+        <Link className="btn-grande" href="/demo">
           {t("cta_entrar_demo")}
         </Link>
       </div>
-    </main>
+    </>
   );
 }
