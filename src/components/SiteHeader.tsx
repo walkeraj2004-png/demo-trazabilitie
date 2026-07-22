@@ -6,7 +6,7 @@
    ===================================================================== */
 import Link from "next/link";
 import { LANGS, useI18n } from "@/i18n";
-import { APP_NAME } from "@/config";
+import { APP_NAME, assetPath } from "@/config";
 
 export function SiteHeader() {
   const { lang, setLang, t } = useI18n();
@@ -15,7 +15,7 @@ export function SiteHeader() {
     <header className="header">
       <Link className="brand" href="/">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="brand-icon" src="/assets/logo-icon.png" alt="" width={32} height={32} />
+        <img className="brand-icon" src={assetPath("/assets/logo-icon.png")} alt="" width={32} height={32} />
         {APP_NAME}
       </Link>
 

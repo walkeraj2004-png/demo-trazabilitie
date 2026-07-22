@@ -648,6 +648,52 @@ li.actual .nodo-btn:hover .nodo { filter: none; }
   .rol-banner { margin-left: 1.5rem; margin-right: 1.5rem; }
 }
 
+/* ---------- sub-navegación dentro de un panel de rol ----------
+   Convierte secciones apiladas en vistas separadas: una a la vez, con
+   feedback de presión (scale en :active, Emil) en vez de scroll infinito. */
+.subnav-wrap { max-width: 1200px; margin: 1.1rem auto 0; padding: 0 1.5rem; }
+
+.subnav-pills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.subnav-pill {
+  position: relative;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--azul);
+  background: var(--azul-fondo);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  min-height: 38px;
+  cursor: pointer;
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background 140ms ease, color 140ms ease;
+}
+
+.subnav-pill:hover { border-color: var(--azul-claro); }
+.subnav-pill:active { transform: scale(0.97); }
+.subnav-pill.activa { background: var(--azul); color: #fff; }
+
+.subnav-punto {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #BA7517;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .subnav-pill { transition: background 140ms ease, color 140ms ease; }
+  .subnav-pill:active { transform: none; }
+}
+
 /* Punto de "cambios sin ver" — 8px, mismo ámbar que .nuevo. El espacio se
    reserva siempre (visibility, no display) para que la pestaña no cambie
    de ancho al aparecer o desaparecer. */
@@ -903,6 +949,19 @@ details > summary:hover { color: #17466B; }
 
 @media (prefers-reduced-motion: no-preference) {
   .nuevo { animation: nuevoEntra 0.5s ease; }
+}
+
+/* Excepción: cuando ".nuevo" cae sobre un panel entero (una tarjeta
+   grande), llenarlo de ámbar se lee como un estado de error, no como
+   "esto es nuevo". Se reemplaza por un acento superior discreto; los
+   elementos pequeños dentro (campo, fila, kpi, badge) conservan el
+   resaltado fuerte de arriba. */
+.panel.nuevo {
+  background: #fff;
+  border-left: none;
+  border-top: 3px solid #BA7517;
+  border-radius: 12px;
+  font-weight: inherit;
 }
 
 @keyframes nuevoEntra {
