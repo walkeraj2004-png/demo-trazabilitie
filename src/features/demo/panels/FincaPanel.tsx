@@ -24,8 +24,18 @@ export function FincaPanel({ estado }: { estado: number }) {
   const cajasResaltar = estado === 1 || estado === 3;
   const log = buildLog(estado);
 
+  /* Cada "nuevo" de la sub-vista Expediente vive en una sola constante,
+     usada tanto en su punto de render como en el OR de abajo — así el
+     punto de "cambios sin ver" de la pestaña no puede quedar desalineado
+     de lo que en verdad se resalta adentro (bug: faltaba `nuevoEtiquetas`
+     en el OR aunque el ítem de documentos ya se marcaba nuevo). */
+  const nuevoCreacion = estado === 1;
+  const nuevoValidacion = estado === 2;
+  const nuevoPeso = estado === NUM_ALERTA_ABIERTA;
+  const nuevoEtiquetas = estado === 3;
+  const nuevoCfe = estado === NUM_CFE_EMITIDO;
   const expedienteCambio =
-    estado === 1 || estado === 2 || estado === NUM_ALERTA_ABIERTA || estado === NUM_CFE_EMITIDO;
+    nuevoCreacion || nuevoValidacion || nuevoPeso || nuevoEtiquetas || nuevoCfe;
 
   return (
     <>
@@ -41,16 +51,16 @@ export function FincaPanel({ estado }: { estado: number }) {
             tieneCambios: expedienteCambio,
             content: (
               <>
-                <div className={cx("panel", estado === 1 && "nuevo")}>
+                <div className={cx("panel", nuevoCreacion && "nuevo")}>
                   <div className="panel-cabecera">
                     <h2>{t("expediente_titulo", { id: p.id })}</h2>
                     <button
-                      className={cx("btn", "btn-sec", estado === 2 && "nuevo")}
+                      className={cx("btn", "btn-sec", nuevoValidacion && "nuevo")}
                       disabled
                       title={editable ? t("title_accion_simulada") : t("title_edicion_bloqueada")}
                     >
                       {editable ? t("btn_editar_pedido") : t("btn_edicion_bloqueada")}
-                      {estado === 2 && <Nuevo />}
+                      {nuevoValidacion && <Nuevo />}
                     </button>
                   </div>
                   <div className="campos">
@@ -78,7 +88,7 @@ export function FincaPanel({ estado }: { estado: number }) {
                       rol="finca"
                       campo="peso"
                       etiqueta={t("label_peso_declarado")}
-                      resaltar={estado === NUM_ALERTA_ABIERTA}
+                      resaltar={nuevoPeso}
                     >
                       {p.producto.pesoDeclarado}
                       {estado >= NUM_ALERTA_ABIERTA && (
@@ -105,26 +115,26 @@ export function FincaPanel({ estado }: { estado: number }) {
                 <div className="panel">
                   <h3>{t("documentos_titulo")}</h3>
                   <ul className="docs">
-                    <li className={cx(estado === 2 && "nuevo")}>
+                    <li className={cx(nuevoValidacion && "nuevo")}>
                       {t("doc_factura_prefix")} {p.monto} —{" "}
                       {estado === 1 ? t("doc_factura_borrador") : t("doc_factura_registrada")}
-                      {estado === 2 && <Nuevo />}
+                      {nuevoValidacion && <Nuevo />}
                     </li>
-                    <li className={cx(estado === 3 && "nuevo")}>
+                    <li className={cx(nuevoEtiquetas && "nuevo")}>
                       {estado >= 3 ? (
                         <>
                           {t("doc_etiquetas_emitidas")}
-                          {estado === 3 && <Nuevo />}
+                          {nuevoEtiquetas && <Nuevo />}
                         </>
                       ) : (
                         <span className="pendiente-doc">{t("doc_etiquetas_pendientes")}</span>
                       )}
                     </li>
-                    <li className={cx(estado === NUM_CFE_EMITIDO && "nuevo")}>
+                    <li className={cx(nuevoCfe && "nuevo")}>
                       {estado >= NUM_CFE_EMITIDO ? (
                         <>
                           {t("doc_cfe_emitido", { numero: p.cfe.numero, ephyto: p.cfe.ephyto })}
-                          {estado === NUM_CFE_EMITIDO && <Nuevo />}
+                          {nuevoCfe && <Nuevo />}
                         </>
                       ) : (
                         <span className="pendiente-doc">{t("doc_cfe_pendiente")}</span>
@@ -146,7 +156,7 @@ export function FincaPanel({ estado }: { estado: number }) {
                   {estado >= 3
                     ? CAJAS.map((c) => (
                         <Link
-                          className={cx("caja-card", estado === 3 && "nuevo")}
+                          className={cx("caja-card", nuevoEtiquetas && "nuevo")}
                           href={hrefCaja(c.id)}
                           key={c.id}
                         >
@@ -154,7 +164,7 @@ export function FincaPanel({ estado }: { estado: number }) {
                           <span className="caja-id">{c.id}</span>
                           <span className="caja-etq">
                             {c.etiqueta}
-                            {estado === 3 && <Nuevo />}
+                            {nuevoEtiquetas && <Nuevo />}
                           </span>
                         </Link>
                       ))
