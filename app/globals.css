@@ -917,6 +917,19 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
 
 .qr-fallback { font-size: 0.7rem; color: var(--gris); text-align: center; }
 
+.qr-pendiente {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 6px;
+  border: 1px dashed var(--gris-borde);
+  border-radius: 10px;
+  font-size: 0.62rem;
+  color: var(--gris);
+  text-align: center;
+}
+
 /* ---------- checks Agrocalidad ---------- */
 
 .checks { list-style: none; display: grid; gap: 0.45rem; }

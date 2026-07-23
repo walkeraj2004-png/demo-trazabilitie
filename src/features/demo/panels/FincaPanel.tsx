@@ -143,13 +143,35 @@ export function FincaPanel({ estado }: { estado: number }) {
               <div className="panel">
                 <h3>{t("cajas_titulo")}</h3>
                 <div className="grid-cajas">
-                  {CAJAS.map((c) => (
-                    <Link className="caja-card" href={hrefCaja(c.id)} key={c.id}>
-                      <Qr url={urlCaja(c.id, estado, lang)} size={72} />
-                      <span className="caja-id">{c.id}</span>
-                      <span className="caja-etq">{estado >= 3 ? c.etiqueta : t("sin_etiqueta")}</span>
-                    </Link>
-                  ))}
+                  {estado >= 3
+                    ? CAJAS.map((c) => (
+                        <Link
+                          className={cx("caja-card", estado === 3 && "nuevo")}
+                          href={hrefCaja(c.id)}
+                          key={c.id}
+                        >
+                          <Qr url={urlCaja(c.id, estado, lang)} size={72} />
+                          <span className="caja-id">{c.id}</span>
+                          <span className="caja-etq">
+                            {c.etiqueta}
+                            {estado === 3 && <Nuevo />}
+                          </span>
+                        </Link>
+                      ))
+                    : CAJAS.map((c) => (
+                        <Link className="caja-card" href={hrefCaja(c.id)} key={c.id}>
+                          <span className="qr-slot qr-pendiente" style={{ width: 72, height: 72 }}>
+                            {t("etiqueta_pendiente_emision")}
+                          </span>
+                          <span className="caja-id">{c.id}</span>
+                          <span className="caja-etq">
+                            {t("campo_producto_simple", {
+                              descripcion: t("producto_descripcion"),
+                              tallos: p.producto.tallosPorCaja,
+                            })}
+                          </span>
+                        </Link>
+                      ))}
                 </div>
               </div>
             ),
