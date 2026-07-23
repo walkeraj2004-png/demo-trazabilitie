@@ -911,6 +911,8 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
 
 .caja-etq { font-size: 0.72rem; color: var(--gris); }
 
+.caja-especie { font-size: 0.68rem; color: var(--gris); }
+
 .qr-slot img, .qr-slot canvas { display: block; }
 
 .qr-fallback { font-size: 0.7rem; color: var(--gris); text-align: center; }

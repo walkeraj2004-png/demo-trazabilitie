@@ -100,6 +100,14 @@ export function CajaView() {
             </span>
           </div>
           <div className="campo">
+            <span className="campo-k">{t("label_especie")}</span>
+            <span className="campo-v">{t("producto_especie")}</span>
+          </div>
+          <div className="campo">
+            <span className="campo-k">{t("label_variedad")}</span>
+            <span className="campo-v">{t("producto_variedad")}</span>
+          </div>
+          <div className="campo">
             <span className="campo-k">{t("label_cfe")}</span>
             <span className="campo-v">
               {estado >= NUM_CFE_EMITIDO
@@ -124,7 +132,7 @@ export function CajaView() {
                     {esUltimo && <Nuevo />}
                   </span>
                   <span className="tl-meta">
-                    {actorLabel(ev.actorId)} · {ev.lugar}
+                    {actorLabel(ev.actorId, t)} · {ev.lugar}
                   </span>
                 </li>
               );

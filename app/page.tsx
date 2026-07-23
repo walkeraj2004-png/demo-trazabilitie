@@ -7,7 +7,7 @@ import { assetPath } from "@/config";
 /* Tipo visual de cada nodo del flujo, derivado de la posición en la
    máquina de estados: relleno navy = paso del Estado; hueco = actor
    privado (mismo criterio que el diagrama institucional del POC). */
-const ES_PRIVADO = new Set([0, 3, 5, 7]);
+const ES_PRIVADO = new Set([0, 2, 3, 5, 7]);
 const RESTRICCIONES = [1, 2, 3, 4, 5, 6] as const;
 
 export default function Home() {

@@ -80,7 +80,7 @@ export function TablaLog({
           return (
             <tr className={clase} key={`${e.estado}-${i}`}>
               <td>{e.hora}</td>
-              <td>{actorLabel(e.actorId)}</td>
+              <td>{actorLabel(e.actorId, t)}</td>
               <td>
                 {t(e.accionKey)}
                 {nueva && <Nuevo />}

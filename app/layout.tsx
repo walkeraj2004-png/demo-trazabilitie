@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: `${APP_NAME} · Visibilidad compartida para la exportación de flores`,
   description:
-    "Un expediente compartido por pedido, avanzado por escaneos y visible según rol. Fusiona Xpotrack, couriers y Agrocalidad en una sola línea de tiempo.",
+    "Un expediente compartido por pedido, avanzado por escaneos y visible según rol. Une el tracking por caja, couriers y Agrocalidad en una sola línea de tiempo.",
 };
 
 export default function RootLayout({

@@ -6,9 +6,8 @@
    ===================================================================== */
 import { PEDIDO } from "@/domain";
 import type { ActorId } from "@/domain";
-import { APP_NAME } from "@/config";
 
-export function actorLabel(actorId: ActorId): string {
+export function actorLabel(actorId: ActorId, t: (key: string) => string): string {
   switch (actorId) {
     case "finca":
       return PEDIDO.finca.nombre;
@@ -23,6 +22,6 @@ export function actorLabel(actorId: ActorId): string {
     case "aerolinea":
       return `LATAM Cargo (${PEDIDO.vuelo})`;
     case "sistema":
-      return APP_NAME;
+      return t("actor_sistema");
   }
 }

@@ -23,7 +23,7 @@ export const ESTADOS: readonly Estado[] = [
   },
   {
     key: "etiquetado",
-    evento: { hora: "09:30", actorId: "agrocalidad", lugar: "Quito" },
+    evento: { hora: "09:30", actorId: "sistema", lugar: "Quito" },
     cajaEvento: { hora: "09:48", actorId: "finca", lugar: "Cayambe", esEscaneo: true },
   },
   {

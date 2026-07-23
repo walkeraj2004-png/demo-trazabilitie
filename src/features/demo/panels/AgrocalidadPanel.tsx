@@ -125,6 +125,9 @@ export function AgrocalidadPanel({ estado }: { estado: number }) {
                           <Qr url={urlCaja(c.id, estado, lang)} size={64} />
                           <span className="caja-id">{c.id}</span>
                           <span className="caja-etq">{c.etiqueta}</span>
+                          <span className="caja-especie">
+                            {t("producto_especie")} · {t("producto_variedad")}
+                          </span>
                         </Link>
                       ))}
                     </div>
@@ -170,7 +173,7 @@ export function AgrocalidadPanel({ estado }: { estado: number }) {
                               {u ? t(u.accionKey) : "—"}
                               {filaNueva && <Nuevo />}
                             </td>
-                            <td>{u ? actorLabel(u.actorId) : "—"}</td>
+                            <td>{u ? actorLabel(u.actorId, t) : "—"}</td>
                             <td>{u ? u.lugar : "—"}</td>
                             <td>{u ? u.hora : "—"}</td>
                           </tr>
