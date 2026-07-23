@@ -25,6 +25,7 @@ const GLOSA = {
   en: { awbHawb: "airway bill", dae: "customs declaration" },
 } as const;
 
+const NUM_VALIDADO_GUIA = numeroDeEstado("validado_guia");
 const NUM_ETIQUETADO = numeroDeEstado("etiquetado");
 
 export function AgenciaPanel({
@@ -48,6 +49,17 @@ export function AgenciaPanel({
   const logAgencia = buildLog(estado).filter(
     (e) => e.actorId === "agencia" || e.actorId === "paletizadora",
   );
+  /* Estado 1 = la solicitud de reserva llegando a la agencia (aún sin
+     guías propias); en estado 2 la agencia confirma y asigna AWB/HAWB.
+     Del 3 en adelante vuelve al encabezado estable de "quién es esto". */
+  const guiasAsignadas = estado >= NUM_VALIDADO_GUIA;
+  const guiasNuevo = estado === NUM_VALIDADO_GUIA;
+  const tituloAgencia =
+    estado === 1
+      ? t("agencia_titulo_solicitud", { id: p.id })
+      : guiasNuevo
+        ? t("agencia_titulo_confirmada")
+        : t("agencia_titulo", { agencia: p.agencia.nombre, id: p.id });
 
   return (
     <>
@@ -56,7 +68,7 @@ export function AgenciaPanel({
 
       <div className={cx("panel", estado === 1 && "nuevo")}>
         <div className="panel-cabecera">
-          <h2>{t("agencia_titulo", { agencia: p.agencia.nombre, id: p.id })}</h2>
+          <h2>{tituloAgencia}</h2>
           <button
             id="btn-escanear-agencia"
             className={cx("btn", "btn-pri", puedeEscanear && "nuevo")}
@@ -68,7 +80,9 @@ export function AgenciaPanel({
             {puedeEscanear && <Nuevo />}
           </button>
         </div>
-        <p className="nota-tabla">{t("nota_escaneo_mecanismo")}</p>
+        <p className="nota-tabla">
+          {estado === 1 ? t("agencia_contexto_solicitud") : t("nota_escaneo_mecanismo")}
+        </p>
         <div className="campos">
           <Campo rol="agencia" campo="finca" etiqueta={t("label_finca")}>
             {p.finca.nombre} · {p.finca.ubicacion}
@@ -99,8 +113,19 @@ export function AgenciaPanel({
               </>
             )}
           </Campo>
-          <Campo rol="agencia" campo="logistica" etiqueta={t("label_awb_hawb")}>
-            {p.awb} / {p.hawb} <span className="glosa">({glosa.awbHawb})</span>
+          <Campo
+            rol="agencia"
+            campo="logistica"
+            etiqueta={t("label_awb_hawb")}
+            resaltar={guiasNuevo}
+          >
+            {guiasAsignadas ? (
+              <>
+                {p.awb} / {p.hawb} <span className="glosa">({glosa.awbHawb})</span>
+              </>
+            ) : (
+              <span className="pendiente-doc">{t("awb_hawb_por_asignar")}</span>
+            )}
           </Campo>
           <Campo rol="agencia" campo="logistica" etiqueta={t("label_dae")}>
             {p.dae} <span className="glosa">({glosa.dae})</span>

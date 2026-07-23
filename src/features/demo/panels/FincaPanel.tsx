@@ -103,8 +103,17 @@ export function FincaPanel({ estado }: { estado: number }) {
                     <Campo rol="finca" campo="logistica" etiqueta={t("label_agencia_carga")}>
                       {p.agencia.nombre} · {p.agencia.agente}
                     </Campo>
-                    <Campo rol="finca" campo="logistica" etiqueta={t("label_awb_hawb")}>
-                      {p.awb} / {p.hawb}
+                    <Campo
+                      rol="finca"
+                      campo="logistica"
+                      etiqueta={t("label_awb_hawb")}
+                      resaltar={nuevoValidacion}
+                    >
+                      {estado >= 2 ? (
+                        `${p.awb} / ${p.hawb}`
+                      ) : (
+                        <span className="pendiente-doc">{t("awb_hawb_por_asignar")}</span>
+                      )}
                     </Campo>
                     <Campo rol="finca" campo="logistica" etiqueta={t("label_dae_destino_vuelo")}>
                       {p.dae} · {p.destino} · {p.vuelo}

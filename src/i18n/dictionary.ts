@@ -119,7 +119,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     estado_nombre_cerrado: "DAE cerrada",
 
     estado_toast_creado: "Florícola El Rosal creó el pedido PED-2026-0417 · factura aún no transmitida",
-    estado_toast_validado_guia: "GUIA validó operador OP-17-00482, sitio con BPA vigente y variedad Freedom",
+    estado_toast_validado_guia: "Validado por GUIA · reserva confirmada por la agencia",
     estado_toast_etiquetado: "24 etiquetas QR emitidas · orden de pago USD 2.26 generada",
     estado_toast_recibido_agencia: "AeroCarga Andina recibió las 24 cajas en Tababela · ⚠ discrepancia de peso detectada",
     estado_toast_cfe_emitido: "Discrepancia de peso resuelta · CFE emitido · ePhyto",
@@ -176,6 +176,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     label_peso_declarado: "Peso declarado",
     label_agencia_carga: "Agencia de carga",
     label_awb_hawb: "AWB / HAWB",
+    awb_hawb_por_asignar: "por asignar",
     label_dae_destino_vuelo: "DAE · Destino · Vuelo",
     label_consignatario: "Consignatario",
     label_carga: "Carga",
@@ -245,6 +246,9 @@ export const I18N: Record<Lang, Record<string, string>> = {
 
     /* ---------- Pestaña Agencia ---------- */
     agencia_titulo: "{agencia} · pedido {id}",
+    agencia_titulo_solicitud: "Nueva solicitud de reserva · {id}",
+    agencia_titulo_confirmada: "Reserva confirmada · guías asignadas",
+    agencia_contexto_solicitud: "Solicitud recibida del expediente de la finca — sin llamadas, sin correos.",
     title_simular_escaneo: "Simula el escaneo de recepción de las 24 cajas",
     title_escaneo_no_disponible: "Disponible solo cuando las cajas etiquetadas llegan a la agencia (estado 3)",
     btn_escanear_recepcion: "📷 Simular escaneo de recepción",
@@ -415,7 +419,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     estado_nombre_cerrado: "DAE closed",
 
     estado_toast_creado: "Florícola El Rosal created order PED-2026-0417 · invoice not yet transmitted",
-    estado_toast_validado_guia: "GUIA validated operator OP-17-00482, site with valid BPA, and Freedom variety",
+    estado_toast_validado_guia: "Validated by GUIA · booking confirmed by the agency",
     estado_toast_etiquetado: "24 QR labels issued · USD 2.26 payment order generated",
     estado_toast_recibido_agencia: "AeroCarga Andina received the 24 boxes in Tababela · ⚠ weight discrepancy detected",
     estado_toast_cfe_emitido: "Weight discrepancy resolved · CFE issued · ePhyto",
@@ -472,6 +476,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     label_peso_declarado: "Declared weight",
     label_agencia_carga: "Cargo agency",
     label_awb_hawb: "AWB / HAWB",
+    awb_hawb_por_asignar: "to be assigned",
     label_dae_destino_vuelo: "DAE · Destination · Flight",
     label_consignatario: "Consignee",
     label_carga: "Cargo",
@@ -541,6 +546,9 @@ export const I18N: Record<Lang, Record<string, string>> = {
 
     /* ---------- Cargo agency tab ---------- */
     agencia_titulo: "{agencia} · order {id}",
+    agencia_titulo_solicitud: "New booking request · {id}",
+    agencia_titulo_confirmada: "Booking confirmed · air waybills assigned",
+    agencia_contexto_solicitud: "Request received from the farm's case file — no calls, no emails.",
     title_simular_escaneo: "Simulates the receiving scan of the 24 boxes",
     title_escaneo_no_disponible: "Only available once labeled boxes arrive at the agency (step 3)",
     btn_escanear_recepcion: "📷 Simulate receiving scan",

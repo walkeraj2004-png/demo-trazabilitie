@@ -17,7 +17,7 @@ function estadosDe(...keys: EstadoKey[]): ReadonlySet<number> {
 const CAMBIOS: Record<Rol, ReadonlySet<number>> = {
   finca: estadosDe("validado_guia", "etiquetado", "recibido_agencia", "cfe_emitido"),
   expoflores: estadosDe("recibido_agencia", "cfe_emitido"),
-  agencia: estadosDe("etiquetado", "recibido_agencia", "cfe_emitido", "paletizado"),
+  agencia: estadosDe("validado_guia", "etiquetado", "recibido_agencia", "cfe_emitido", "paletizado"),
   agrocalidad: estadosDe(
     "validado_guia",
     "etiquetado",
