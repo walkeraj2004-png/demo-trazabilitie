@@ -18,7 +18,7 @@ export default function Home() {
       <section className="hero">
         <h1 className="hero-logo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={assetPath("/assets/logo-completo.png")} alt="TrazaFlor" width={640} height={708} />
+          <img src={assetPath("/assets/logo-completo.png")} alt="TrazaFlor" width={640} height={640} />
         </h1>
         <p className="tagline">{t("tagline")}</p>
         <div className="resumen">

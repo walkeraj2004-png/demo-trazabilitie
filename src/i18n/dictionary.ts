@@ -9,7 +9,7 @@ import type { Lang } from "./config";
 export const I18N: Record<Lang, Record<string, string>> = {
   es: {
     /* ---------- header / global ---------- */
-    credito: "TrazaFlor · impulsado por el Sistema de Trazabilidad",
+    credito: "TrazaFlor · centro del Sistema de Trazabilidad",
     selector_idioma_aria: "Selector de idioma",
     nuevo: "nuevo",
     aria_cambios_sin_ver: "cambios sin ver",
@@ -206,8 +206,8 @@ export const I18N: Record<Lang, Record<string, string>> = {
     doc_factura_prefix: "📄 Factura comercial",
     doc_factura_borrador: "borrador (no transmitida)",
     doc_factura_registrada: "registrada en el expediente",
-    doc_etiquetas_emitidas: "🏷️ Etiquetas Agrocalidad — 24/24 emitidas",
-    doc_etiquetas_pendientes: "🏷️ Etiquetas Agrocalidad — pendientes",
+    doc_etiquetas_emitidas: "🏷️ Etiquetas de tipo Agrocalidad — 24/24 emitidas por el Sistema de Trazabilidad",
+    doc_etiquetas_pendientes: "🏷️ Etiquetas de tipo Agrocalidad — pendientes",
     doc_cfe_emitido: "✅ CFE {numero} · {ephyto}",
     doc_cfe_pendiente: "📋 CFE — pendiente",
     nav_expediente: "Expediente",
@@ -264,6 +264,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     vacio_validacion: "Pendiente — se ejecuta cuando GUIA valida el pedido.",
     emision_titulo: "Solicitud verificada · etiquetas emitidas por el Sistema de Trazabilidad",
     etiquetas_emitidas: "{n} etiquetas emitidas · orden de pago <strong>{total}</strong> ({detalle})",
+    nota_instrumento_agrocalidad: "Instrumento de Agrocalidad · tarifa {detalle} · emisión delegada al Sistema de Trazabilidad",
     resumen_ver_etiquetas: "Ver las 24 etiquetas",
     vacio_etiquetas: "Pendiente — las etiquetas se emiten tras la validación.",
     custodia_titulo: "Cadena de custodia",
@@ -304,7 +305,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
 
   en: {
     /* ---------- header / global ---------- */
-    credito: "TrazaFlor · powered by the Traceability System",
+    credito: "TrazaFlor · hub of the Traceability System",
     selector_idioma_aria: "Language selector",
     nuevo: "new",
     aria_cambios_sin_ver: "unseen changes",
@@ -501,8 +502,8 @@ export const I18N: Record<Lang, Record<string, string>> = {
     doc_factura_prefix: "📄 Commercial invoice",
     doc_factura_borrador: "draft (not transmitted)",
     doc_factura_registrada: "recorded in the case file",
-    doc_etiquetas_emitidas: "🏷️ Agrocalidad labels — 24/24 issued",
-    doc_etiquetas_pendientes: "🏷️ Agrocalidad labels — pending",
+    doc_etiquetas_emitidas: "🏷️ Agrocalidad-type labels — 24/24 issued by the Traceability System",
+    doc_etiquetas_pendientes: "🏷️ Agrocalidad-type labels — pending",
     doc_cfe_emitido: "✅ CFE {numero} · {ephyto}",
     doc_cfe_pendiente: "📋 CFE — pending",
     nav_expediente: "Case file",
@@ -559,6 +560,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     vacio_validacion: "Pending — runs once GUIA validates the order.",
     emision_titulo: "Request verified · labels issued by the Traceability System",
     etiquetas_emitidas: "{n} labels issued · payment order <strong>{total}</strong> ({detalle})",
+    nota_instrumento_agrocalidad: "Agrocalidad instrument · fee {detalle} · issuance delegated to the Traceability System",
     resumen_ver_etiquetas: "View all 24 labels",
     vacio_etiquetas: "Pending — labels are issued after validation.",
     custodia_titulo: "Chain of custody",

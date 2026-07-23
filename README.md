@@ -57,8 +57,8 @@ punto del demo.
 ## Cómo cambiar el nombre del producto
 
 Editar la constante `APP_NAME` en `src/config.ts`. Los títulos y el
-crédito del header («… · impulsado por Xpotrack») usan el nombre
-literal — buscar y reemplazar «TrazaFlor» si se cambia.
+crédito del header («… · centro del Sistema de Trazabilidad») usan el
+nombre literal — buscar y reemplazar «TrazaFlor» si se cambia.
 
 ## Guion del demo
 

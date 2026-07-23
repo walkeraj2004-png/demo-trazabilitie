@@ -116,6 +116,9 @@ export function AgrocalidadPanel({ estado }: { estado: number }) {
                         })}
                       />
                     </p>
+                    <p className="nota-tabla">
+                      {t("nota_instrumento_agrocalidad", { detalle: p.tarifas.etiquetasDetalle })}
+                    </p>
                     <p className="nota-recaudo">
                       {t("nota_recaudo_prefix")} {t("agregados_recaudacion_dia")}
                     </p>
