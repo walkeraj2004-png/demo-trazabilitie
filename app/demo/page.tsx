@@ -17,6 +17,7 @@ import { FincaPanel } from "@/features/demo/panels/FincaPanel";
 import { ExpofloresPanel } from "@/features/demo/panels/ExpofloresPanel";
 import { AgenciaPanel } from "@/features/demo/panels/AgenciaPanel";
 import { AgrocalidadPanel } from "@/features/demo/panels/AgrocalidadPanel";
+import { SenaePanel } from "@/features/demo/panels/SenaePanel";
 import swap from "@/features/demo/panelSwap.module.css";
 
 const ARIA: Record<string, string> = {
@@ -24,6 +25,7 @@ const ARIA: Record<string, string> = {
   expoflores: "aria_vista_expoflores",
   agencia: "aria_vista_agencia",
   agrocalidad: "aria_vista_agrocalidad",
+  senae: "aria_vista_senae",
 };
 
 export default function DemoPage() {
@@ -62,6 +64,7 @@ export default function DemoPage() {
           {s.tab === "expoflores" && <ExpofloresPanel estado={s.estado} />}
           {s.tab === "agencia" && <AgenciaPanel estado={s.estado} onEscanear={s.avanzar} />}
           {s.tab === "agrocalidad" && <AgrocalidadPanel estado={s.estado} />}
+          {s.tab === "senae" && <SenaePanel estado={s.estado} />}
         </section>
       </main>
 

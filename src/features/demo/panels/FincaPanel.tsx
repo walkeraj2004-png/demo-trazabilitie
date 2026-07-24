@@ -7,7 +7,7 @@
    estado, para que lo resaltado nunca quede enterrado.
    ===================================================================== */
 import Link from "next/link";
-import { PEDIDO, CAJAS, buildLog, NUM_ALERTA_ABIERTA, NUM_CFE_EMITIDO } from "@/domain";
+import { PEDIDO, CAJAS, buildLog, NUM_CFE_EMITIDO } from "@/domain";
 import { useI18n } from "@/i18n";
 import { cx, Nuevo } from "@/presentation/ui";
 import { hrefCaja, urlCaja } from "@/presentation/links";
@@ -31,11 +31,9 @@ export function FincaPanel({ estado }: { estado: number }) {
      en el OR aunque el ítem de documentos ya se marcaba nuevo). */
   const nuevoCreacion = estado === 1;
   const nuevoValidacion = estado === 2;
-  const nuevoPeso = estado === NUM_ALERTA_ABIERTA;
   const nuevoEtiquetas = estado === 3;
   const nuevoCfe = estado === NUM_CFE_EMITIDO;
-  const expedienteCambio =
-    nuevoCreacion || nuevoValidacion || nuevoPeso || nuevoEtiquetas || nuevoCfe;
+  const expedienteCambio = nuevoCreacion || nuevoValidacion || nuevoEtiquetas || nuevoCfe;
 
   return (
     <>
@@ -84,21 +82,8 @@ export function FincaPanel({ estado }: { estado: number }) {
                         total: tallosTotal,
                       })}
                     </Campo>
-                    <Campo
-                      rol="finca"
-                      campo="peso"
-                      etiqueta={t("label_peso_declarado")}
-                      resaltar={nuevoPeso}
-                    >
+                    <Campo rol="finca" campo="peso" etiqueta={t("label_peso_declarado")}>
                       {p.producto.pesoDeclarado}
-                      {estado >= NUM_ALERTA_ABIERTA && (
-                        <>
-                          {" · "}
-                          <span className="dato-alerta">
-                            {t("palabra_escaneado")} {p.producto.pesoEscaneado}
-                          </span>
-                        </>
-                      )}
                     </Campo>
                     <Campo rol="finca" campo="logistica" etiqueta={t("label_agencia_carga")}>
                       {p.agencia.nombre} · {p.agencia.agente}

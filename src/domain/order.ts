@@ -22,7 +22,6 @@ export const PEDIDO: Pedido = {
     tallosPorCaja: 300,
     tallosTotal: "7,200 tallos",
     pesoDeclarado: "312 kg",
-    pesoEscaneado: "298 kg",
   },
   monto: "USD 4,320.00",
   agencia: { nombre: "AeroCarga Andina", agente: "P. Guzmán" },
@@ -52,9 +51,13 @@ export const CAJAS: readonly Caja[] = Array.from({ length: PEDIDO.producto.cajas
   };
 });
 
-/** Alerta scripted de discrepancia de peso: abre en `recibido_agencia`,
-    se resuelve en `cfe_emitido` (Agrocalidad verifica el peso corregido
-    como requisito previo a emitir el CFE). */
+/** La caja específica rotulada con la variedad incorrecta — fuente única
+    del ID para el texto de la alerta y para su propia cadena de custodia. */
+export const ID_CAJA_ALERTA = "ROS-0417-014";
+
+/** Alerta scripted de discrepancia de etiquetado de variedad: abre en
+    `recibido_agencia`, se resuelve en `cfe_emitido` (Agrocalidad verifica
+    la variedad corregida en finca como requisito previo a emitir el CFE). */
 export const ALERTA: Alerta = {
   abierta: { hora: "14:35", lugar: "Tababela" },
   resuelta: { hora: "15:50", actorId: "agrocalidad", lugar: "Quito" },

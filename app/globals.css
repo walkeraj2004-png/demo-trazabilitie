@@ -16,10 +16,13 @@
   --gris-borde: #D9E0E7;
   --gris-fondo: #F5F7F9;
   --tinta: #22303C;
+  --morado: #6B4FA0;
+  --morado-fondo: #F1ECFA;
 
-  /* Identidad por rol (reusa la paleta existente, sin colores nuevos):
-     cada agencia/rol del demo se reconoce por el mismo acento en todas
-     partes (pestaña activa, banner del panel). */
+  /* Identidad por rol: cada agencia/rol del demo se reconoce por el mismo
+     acento en todas partes (pestaña activa, banner del panel). Los primeros
+     cuatro reusan la paleta base; SENAE (quinto rol, aduana) suma el único
+     acento nuevo — los cuatro existentes ya estaban asignados. */
   --rol-agrocalidad: var(--azul);
   --rol-agrocalidad-fondo: var(--azul-fondo);
   --rol-finca: var(--verde);
@@ -28,6 +31,8 @@
   --rol-agencia-fondo: var(--coral-fondo);
   --rol-expoflores: var(--gris);
   --rol-expoflores-fondo: var(--gris-fondo);
+  --rol-senae: var(--morado);
+  --rol-senae-fondo: var(--morado-fondo);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -598,6 +603,7 @@ li.actual .nodo-btn:hover .nodo { filter: none; }
 .tabs button.activa[data-tab="finca"]       { background: var(--rol-finca);       border-color: var(--rol-finca); }
 .tabs button.activa[data-tab="agencia"]     { background: var(--rol-agencia);     border-color: var(--rol-agencia); }
 .tabs button.activa[data-tab="expoflores"]  { background: var(--rol-expoflores);  border-color: var(--rol-expoflores); }
+.tabs button.activa[data-tab="senae"]       { background: var(--rol-senae);       border-color: var(--rol-senae); }
 
 /* ---------- banner de rol (encabezado de cada panel) ----------
    Responde a "¿de quién es esta pantalla?" de un vistazo: badge con
@@ -617,6 +623,7 @@ li.actual .nodo-btn:hover .nodo { filter: none; }
 .rol-banner[data-rol="finca"]       { background: var(--rol-finca-fondo);       border-color: var(--rol-finca); }
 .rol-banner[data-rol="agencia"]     { background: var(--rol-agencia-fondo);     border-color: var(--rol-agencia); }
 .rol-banner[data-rol="expoflores"]  { background: var(--rol-expoflores-fondo);  border-color: var(--rol-expoflores); }
+.rol-banner[data-rol="senae"]       { background: var(--rol-senae-fondo);       border-color: var(--rol-senae); }
 
 .rol-banner-badge {
   flex-shrink: 0;
@@ -636,6 +643,7 @@ li.actual .nodo-btn:hover .nodo { filter: none; }
 .rol-banner[data-rol="finca"]       .rol-banner-badge { background: var(--rol-finca); }
 .rol-banner[data-rol="agencia"]     .rol-banner-badge { background: var(--rol-agencia); }
 .rol-banner[data-rol="expoflores"]  .rol-banner-badge { background: var(--rol-expoflores); }
+.rol-banner[data-rol="senae"]       .rol-banner-badge { background: var(--rol-senae); }
 
 .rol-banner-texto { min-width: 0; }
 
@@ -1109,6 +1117,7 @@ tr.nuevo td:first-child { border-left: 3px solid #BA7517; }
 }
 
 .timeline li.tl-hito::before { background: var(--verde); box-shadow: 0 0 0 2px var(--verde); }
+.timeline li.tl-alerta::before { background: var(--coral); box-shadow: 0 0 0 2px var(--coral); }
 
 .tl-hora { font-size: 0.8rem; color: var(--gris); font-weight: 700; }
 

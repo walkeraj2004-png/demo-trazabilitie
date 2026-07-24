@@ -6,7 +6,7 @@
    ===================================================================== */
 
 export const APP_NAME = "TrazaFlor";
-export const CREDITO = `${APP_NAME} · centro del Sistema de Trazabilidad`;
+export const CREDITO = `${APP_NAME} · impulsado por Xpotrack`;
 
 /** URL absoluta del deploy (para QRs escaneables desde un teléfono). */
 export const BASE_URL =

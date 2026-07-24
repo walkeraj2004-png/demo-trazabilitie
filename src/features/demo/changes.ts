@@ -26,6 +26,7 @@ const CAMBIOS: Record<Rol, ReadonlySet<number>> = {
     "paletizado",
     "embarcado",
   ),
+  senae: estadosDe("validado_guia", "salida_autorizada", "embarcado", "cerrado"),
 };
 
 export function tabTieneCambios(tab: Rol, estado: number): boolean {

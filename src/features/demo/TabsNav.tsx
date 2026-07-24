@@ -15,6 +15,7 @@ const LABEL: Record<Rol, string> = {
   expoflores: "",
   agencia: "tab_agencia",
   agrocalidad: "",
+  senae: "",
 };
 
 const FIJO: Record<Rol, string> = {
@@ -22,6 +23,7 @@ const FIJO: Record<Rol, string> = {
   expoflores: "Expoflores",
   agencia: "Agencia de carga",
   agrocalidad: "Agrocalidad",
+  senae: "SENAE",
 };
 
 export function TabsNav({

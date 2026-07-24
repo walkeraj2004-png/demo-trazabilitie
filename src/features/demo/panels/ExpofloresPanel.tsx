@@ -49,7 +49,7 @@ export function ExpofloresPanel({ estado }: { estado: number }) {
   const alertas = alertaAbierta ? AGREGADOS.alertasAbiertas + 1 : AGREGADOS.alertasAbiertas;
 
   let flag: ReactNode;
-  if (alertaAbierta) flag = <span className="flag flag-alerta">{t("flag_alerta_peso")}</span>;
+  if (alertaAbierta) flag = <span className="flag flag-alerta">{t("flag_alerta_variedad")}</span>;
   else if (estado >= NUM_CFE_EMITIDO)
     flag = <span className="flag flag-ok">{t("flag_sin_alertas")}</span>;
   else flag = <span className="flag">—</span>;

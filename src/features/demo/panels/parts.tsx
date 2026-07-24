@@ -5,7 +5,7 @@
    replica la salida del POC usando las clases del sistema visual real.
    ===================================================================== */
 import type { ReactNode } from "react";
-import { puedeVer } from "@/domain";
+import { puedeVer, ID_CAJA_ALERTA } from "@/domain";
 import type { CampoPermiso, Rol } from "@/domain";
 import type { EventoLog } from "@/domain";
 import { useT } from "@/i18n";
@@ -94,14 +94,16 @@ export function TablaLog({
   );
 }
 
-/** Banner de alerta scripted (peso): coral al abrirse, verde al resolverse.
-    Solo visible en el estado exacto en que ocurre → siempre marcado nuevo. */
+/** Banner de alerta scripted (etiquetado de variedad): coral al abrirse,
+    verde al resolverse. Solo visible en el estado exacto en que ocurre →
+    siempre marcado nuevo. */
 export function BannerAlerta({ estado }: { estado: number }) {
   const t = useT();
   if (estado === NUM_ALERTA_ABIERTA) {
     return (
       <div className="banner banner-alerta nuevo">
-        ⚠ <strong>{t("alerta_activa_label")}</strong> {t("alerta_texto_abierta")}
+        ⚠ <strong>{t("alerta_activa_label")}</strong>{" "}
+        {t("alerta_texto_abierta", { caja: ID_CAJA_ALERTA })}
         <Nuevo />
       </div>
     );

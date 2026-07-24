@@ -125,7 +125,14 @@ export function CajaView() {
             {evs.map((ev, i) => {
               const esUltimo = i === evs.length - 1;
               return (
-                <li className={cx(ev.esEscaneo ? "tl-escaneo" : "tl-hito", esUltimo && "nuevo")} key={`${ev.estado}-${i}`}>
+                <li
+                  className={cx(
+                    ev.esEscaneo ? "tl-escaneo" : "tl-hito",
+                    ev.alerta && "tl-alerta",
+                    esUltimo && "nuevo",
+                  )}
+                  key={`${ev.estado}-${i}`}
+                >
                   <span className="tl-hora">{ev.hora}</span>
                   <span className="tl-accion">
                     {t(ev.accionKey)}

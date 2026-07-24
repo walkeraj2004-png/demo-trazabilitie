@@ -13,12 +13,14 @@ export const ROL_NOMBRE: Record<Lang, Record<Rol, string>> = {
     finca: "Finca",
     agencia: "Agencia de carga",
     expoflores: "Gremio (Expoflores)",
+    senae: "SENAE",
   },
   en: {
     agrocalidad: "Agrocalidad",
     finca: "Farm",
     agencia: "Freight agency",
     expoflores: "Guild (Expoflores)",
+    senae: "SENAE",
   },
 };
 
@@ -28,6 +30,7 @@ export const ROL_BADGE: Record<Rol, string> = {
   finca: "FI",
   agencia: "AG",
   expoflores: "EX",
+  senae: "SE",
 };
 
 /** Qué ve y qué hace este rol, en una línea (banner del panel). */
@@ -38,6 +41,8 @@ export const ROL_VE: Record<Lang, Record<Rol, string>> = {
     finca: "El dueño del pedido: ve su expediente completo, sin nada oculto.",
     expoflores: "El gremio: ve estadísticas y alertas del sector, no los datos de cada pedido.",
     agencia: "La logística: ve la carga y el peso para operar, no el monto del negocio.",
+    senae:
+      "La aduana: autoriza la salida y cierra la declaración, ve el valor declarado, no el detalle fitosanitario.",
   },
   en: {
     agrocalidad:
@@ -45,5 +50,7 @@ export const ROL_VE: Record<Lang, Record<Rol, string>> = {
     finca: "The order owner: sees the complete case file, nothing hidden.",
     expoflores: "The guild: sees sector stats and alerts, not each order's data.",
     agencia: "Logistics: sees the cargo and weight to operate, not the deal amount.",
+    senae:
+      "Customs: authorizes departure and closes the declaration, sees the declared value, not the phytosanitary detail.",
   },
 };

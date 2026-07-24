@@ -7,7 +7,7 @@
    el filtro acoplado por strings (`actor.indexOf("AeroCarga")`).
    ===================================================================== */
 import { ESTADOS, indiceDeEstado } from "./states";
-import { ALERTA } from "./order";
+import { ALERTA, CAJAS, ID_CAJA_ALERTA } from "./order";
 import type { ActorId } from "./types";
 
 export type TipoEvento = "normal" | "alerta" | "resuelta";
@@ -30,12 +30,16 @@ export interface EventoCaja {
   accionKey: string;
   lugar: string;
   esEscaneo: boolean;
+  /** true en el evento de apertura de la alerta scripted (solo la caja
+      afectada la lleva) — distingue su punto en la línea de tiempo. */
+  alerta?: boolean;
 }
 
 const IDX_CFE_EMITIDO = indiceDeEstado("cfe_emitido");
 const IDX_ALERTA_ABIERTA = indiceDeEstado("recibido_agencia");
 /** La alerta se resuelve justo antes de emitir el CFE — mismo estado. */
 const IDX_ALERTA_RESUELTA = IDX_CFE_EMITIDO;
+const IDX_CAJA_ALERTA = CAJAS.findIndex((c) => c.id === ID_CAJA_ALERTA);
 
 export const IDX_PALETIZADO = indiceDeEstado("paletizado");
 export const NUM_ALERTA_ABIERTA = IDX_ALERTA_ABIERTA + 1;
@@ -102,21 +106,55 @@ export function logDeActor(estado: number, actorId: ActorId): EventoLog[] {
   return buildLog(estado).filter((e) => e.actorId === actorId);
 }
 
-/** Cadena de custodia de una caja (por índice) hasta el estado dado. */
+/**
+ * Cadena de custodia de una caja (por índice) hasta el estado dado. Para
+ * la caja de la alerta scripted (`IDX_CAJA_ALERTA`), además intercala la
+ * apertura y resolución de su discrepancia de etiquetado: la apertura
+ * queda como el evento más reciente de su estado (el punto "nuevo" debe
+ * caer en la alerta, no en el escaneo que la acompaña), y la resolución
+ * queda antes del evento del estado, igual que en `buildLog`.
+ */
 export function eventosCaja(idx: number, estado: number): EventoCaja[] {
   const out: EventoCaja[] = [];
+  const esCajaAlerta = idx === IDX_CAJA_ALERTA;
   for (let i = 0; i < estado; i++) {
     const est = ESTADOS[i];
-    if (!est?.cajaEvento) continue;
-    const ce = est.cajaEvento;
-    out.push({
-      estado: i + 1,
-      hora: sumaMinutos(ce.hora, ce.esEscaneo ? idx % 7 : 0),
-      actorId: ce.actorId,
-      accionKey: `caja_evento_${est.key}`,
-      lugar: ce.lugar,
-      esEscaneo: ce.esEscaneo,
-    });
+    if (!est) break;
+
+    if (esCajaAlerta && i === IDX_ALERTA_RESUELTA) {
+      out.push({
+        estado: NUM_ALERTA_RESUELTA,
+        hora: ALERTA.resuelta.hora,
+        actorId: ALERTA.resuelta.actorId,
+        accionKey: "alerta_resuelta_accion",
+        lugar: ALERTA.resuelta.lugar,
+        esEscaneo: false,
+      });
+    }
+
+    if (est.cajaEvento) {
+      const ce = est.cajaEvento;
+      out.push({
+        estado: i + 1,
+        hora: sumaMinutos(ce.hora, ce.esEscaneo ? idx % 7 : 0),
+        actorId: ce.actorId,
+        accionKey: `caja_evento_${est.key}`,
+        lugar: ce.lugar,
+        esEscaneo: ce.esEscaneo,
+      });
+    }
+
+    if (esCajaAlerta && i === IDX_ALERTA_ABIERTA) {
+      out.push({
+        estado: NUM_ALERTA_ABIERTA,
+        hora: ALERTA.abierta.hora,
+        actorId: "sistema",
+        accionKey: "alerta_abierta_accion",
+        lugar: ALERTA.abierta.lugar,
+        esEscaneo: false,
+        alerta: true,
+      });
+    }
   }
   return out;
 }

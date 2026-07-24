@@ -9,7 +9,6 @@ import {
   PEDIDO,
   buildLog,
   numeroDeEstado,
-  NUM_ALERTA_ABIERTA,
   NUM_CFE_EMITIDO,
 } from "@/domain";
 import { useI18n } from "@/i18n";
@@ -97,21 +96,8 @@ export function AgenciaPanel({
               total: tallosTotal,
             })}
           </Campo>
-          <Campo
-            rol="agencia"
-            campo="peso"
-            etiqueta={t("label_peso")}
-            resaltar={estado === NUM_ALERTA_ABIERTA}
-          >
+          <Campo rol="agencia" campo="peso" etiqueta={t("label_peso")}>
             {p.producto.pesoDeclarado} {t("palabra_declarado")}
-            {estado >= NUM_ALERTA_ABIERTA && (
-              <>
-                {" · "}
-                <span className="dato-alerta">
-                  {p.producto.pesoEscaneado} {t("palabra_escaneado")}
-                </span>
-              </>
-            )}
           </Campo>
           <Campo
             rol="agencia"

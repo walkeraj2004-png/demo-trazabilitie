@@ -9,7 +9,7 @@ import type { Lang } from "./config";
 export const I18N: Record<Lang, Record<string, string>> = {
   es: {
     /* ---------- header / global ---------- */
-    credito: "TrazaFlor · centro del Sistema de Trazabilidad",
+    credito: "TrazaFlor · impulsado por Xpotrack",
     selector_idioma_aria: "Selector de idioma",
     nuevo: "nuevo",
     aria_cambios_sin_ver: "cambios sin ver",
@@ -21,7 +21,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
 
     /* ---------- index.html ---------- */
     tagline: "Un expediente compartido, avanzado por escaneos, visible según rol.",
-    resumen_1: 'Cada pedido de exportación vive en un <strong>expediente digital único</strong>, alimentado por el tracking que el Sistema de Trazabilidad ya realiza sobre cada caja.',
+    resumen_1: 'Cada pedido de exportación vive en un <strong>expediente digital único</strong>, alimentado por el tracking que Xpotrack ya realiza sobre cada caja.',
     resumen_2: 'Cada caja lleva un <strong>QR</strong>; cada escaneo — en finca, agencia, paletizadora y aerolínea — <strong>avanza el estado</strong> del expediente en tiempo real.',
     resumen_3: 'Cada actor — finca, gremio, agencia de carga y <strong>Agrocalidad</strong> — ve el mismo expediente a través de <strong>su propia ventana de permisos</strong>.',
 
@@ -60,7 +60,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     diagrama_n1_sub: "genera el pedido",
     diagrama_n2: "Agrocalidad",
     diagrama_n2_sub: "verifica la solicitud · GUIA",
-    diagrama_n3: "Sistema de Trazabilidad",
+    diagrama_n3: "Xpotrack",
     diagrama_n3_sub: "emite las etiquetas",
     diagrama_n4: "Agencia",
     diagrama_n4_sub: "recibe y escanea",
@@ -101,7 +101,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     aria_vista_agrocalidad: "Vista de Agrocalidad",
     btn_reiniciar: "◀ Reiniciar",
     btn_avanzar: "Avanzar simulación ▶",
-    progreso_nota: "Datos de estado provistos por el Sistema de Trazabilidad",
+    progreso_nota: "Datos de estado provistos por Xpotrack",
     nodo_ir_a_estado: "Ir al estado {n}: {nombre}",
 
     /* ---------- caja.html: chrome estático ---------- */
@@ -121,8 +121,8 @@ export const I18N: Record<Lang, Record<string, string>> = {
     estado_toast_creado: "Florícola El Rosal creó el pedido PED-2026-0417 · factura aún no transmitida",
     estado_toast_validado_guia: "Validado por GUIA · reserva confirmada por la agencia",
     estado_toast_etiquetado: "24 etiquetas QR emitidas · orden de pago USD 2.26 generada",
-    estado_toast_recibido_agencia: "AeroCarga Andina recibió las 24 cajas en Tababela · ⚠ discrepancia de peso detectada",
-    estado_toast_cfe_emitido: "Discrepancia de peso resuelta · CFE emitido · ePhyto",
+    estado_toast_recibido_agencia: "AeroCarga Andina recibió las 24 cajas en Tababela · ⚠ discrepancia de etiquetado detectada",
+    estado_toast_cfe_emitido: "Discrepancia de etiquetado resuelta · CFE emitido · ePhyto",
     estado_toast_paletizado: "Cajas verificadas y paletizadas · consolidación autorizada con CFE verificado",
     estado_toast_salida_autorizada: "ECUAPASS autorizó la salida · DAE 055-2026-40-01234567",
     estado_toast_embarcado: "Cajas embarcadas en vuelo LA-1447 · manifiesto transmitido",
@@ -151,12 +151,12 @@ export const I18N: Record<Lang, Record<string, string>> = {
     /* ---------- alerta scripted ---------- */
     alerta_activa_label: "Alerta activa:",
     alerta_archivada_sufijo: "— archivada en el historial",
-    alerta_texto_abierta: "Discrepancia de peso: declarado 312 kg, escaneado 298 kg",
-    alerta_texto_resuelta: "Resuelta: peso corregido en expediente",
-    alerta_abierta_accion: "ALERTA · Discrepancia de peso: declarado 312 kg, escaneado 298 kg",
-    alerta_resuelta_accion: "Alerta resuelta: peso corregido en expediente (298 kg)",
+    alerta_texto_abierta: "Discrepancia de etiquetado: caja {caja} rotulada como var. Explorer · el expediente indica var. Freedom",
+    alerta_texto_resuelta: "Resuelta: variedad verificada en finca y corregida en el expediente — requisito para emisión",
+    alerta_abierta_accion: "ALERTA · Discrepancia de etiquetado: caja ROS-0417-014 rotulada como var. Explorer · expediente indica var. Freedom",
+    alerta_resuelta_accion: "Alerta resuelta: variedad verificada y corregida en el expediente (caja ROS-0417-014)",
     sistema_actor: "Sistema {app}",
-    actor_sistema: "Sistema de Trazabilidad",
+    actor_sistema: "Xpotrack",
 
     /* ---------- overrides de datos con palabras genéricas ---------- */
     producto_descripcion: "Rosa var. Freedom",
@@ -186,7 +186,6 @@ export const I18N: Record<Lang, Record<string, string>> = {
     label_monto_pedido: "Monto del pedido",
     label_etiqueta_agrocalidad: "Etiqueta Agrocalidad",
     label_cfe: "CFE",
-    palabra_escaneado: "escaneado",
     palabra_declarado: "declarado",
 
     campo_oculto_title: "Este dato existe en el expediente pero no es visible para este rol",
@@ -207,7 +206,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     doc_factura_prefix: "📄 Factura comercial",
     doc_factura_borrador: "borrador (no transmitida)",
     doc_factura_registrada: "registrada en el expediente",
-    doc_etiquetas_emitidas: "🏷️ Etiquetas de tipo Agrocalidad — 24/24 emitidas por el Sistema de Trazabilidad",
+    doc_etiquetas_emitidas: "🏷️ Etiquetas de tipo Agrocalidad — 24/24 emitidas por Xpotrack",
     doc_etiquetas_pendientes: "🏷️ Etiquetas de tipo Agrocalidad — pendientes",
     doc_cfe_emitido: "✅ CFE {numero} · {ephyto}",
     doc_cfe_pendiente: "📋 CFE — pendiente",
@@ -227,7 +226,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     resumen_historial_uno: "Ver historial completo (1 evento)",
 
     /* ---------- Pestaña Expoflores ---------- */
-    flag_alerta_peso: "⚠ alerta de peso",
+    flag_alerta_variedad: "⚠ alerta de variedad",
     flag_sin_alertas: "✓ sin alertas",
     nota_gobernanza: 'ℹ️ <strong>Expoflores opera la plataforma pero no accede a datos comerciales.</strong> Gobernanza: comité multi-actor.',
     kpi_pedidos_activos: "Pedidos activos hoy",
@@ -266,9 +265,9 @@ export const I18N: Record<Lang, Record<string, string>> = {
     check_variedad: "✓ Variedad Freedom registrada en el sitio",
     nota_simulacion_api: "Simulación de respuesta API — GUIA",
     vacio_validacion: "Pendiente — se ejecuta cuando GUIA valida el pedido.",
-    emision_titulo: "Solicitud verificada · etiquetas emitidas por el Sistema de Trazabilidad",
+    emision_titulo: "Solicitud verificada · etiquetas emitidas por Xpotrack",
     etiquetas_emitidas: "{n} etiquetas emitidas · orden de pago <strong>{total}</strong> ({detalle})",
-    nota_instrumento_agrocalidad: "Instrumento de Agrocalidad · tarifa {detalle} · emisión delegada al Sistema de Trazabilidad",
+    nota_instrumento_agrocalidad: "Instrumento de Agrocalidad · tarifa {detalle} · emisión delegada a Xpotrack",
     resumen_ver_etiquetas: "Ver las 24 etiquetas",
     vacio_etiquetas: "Pendiente — las etiquetas se emiten tras la validación.",
     custodia_titulo: "Cadena de custodia",
@@ -284,13 +283,23 @@ export const I18N: Record<Lang, Record<string, string>> = {
     tabla_ubicacion: "Ubicación",
     vacio_custodia: "Sin escaneos todavía — la cadena inicia con el etiquetado.",
     certificacion_titulo: "Certificación",
-    certificacion_bloqueada: "Emisión de CFE en espera: discrepancia de peso sin resolver",
-    certificacion_requisito_cumplido: "✔ Discrepancia de peso resuelta · requisito para emisión",
+    certificacion_bloqueada: "Emisión de CFE en espera: discrepancia de variedad sin resolver",
+    certificacion_requisito_cumplido: "✔ Discrepancia de variedad resuelta · requisito para emisión",
     cfe_emitido: "✔ <strong>CFE emitido · ePhyto transmitido · {cfe}</strong><br>{numero} · {ephyto}",
     cardinalidad_pedido: "1 pedido",
     cardinalidad_cfe: "1 CFE",
     cardinalidad_etiquetas: "24 etiquetas",
     vacio_certificacion: "Pendiente — el CFE se emite una vez validado y etiquetado el pedido (un solo certificado ampara las 24 cajas).",
+
+    /* ---------- Pestaña SENAE ---------- */
+    aria_vista_senae: "Vista de SENAE",
+    senae_declaracion_titulo: "Declaración aduanera (DAE)",
+    senae_dae_abierta: "DAE {dae} · abierta",
+    senae_espera_zona_primaria: "Salida pendiente de llegada a zona primaria",
+    senae_salida_autorizada: "Salida autorizada · aforo automático",
+    senae_manifiesto_recibido: "Manifiesto recibido de la aerolínea",
+    senae_dae_cerrada: "DAE regularizada y cerrada",
+    label_cfe_asociado: "CFE asociado",
 
     /* ---------- QR ---------- */
     qr_no_disponible: "QR no disponible (sin conexión al CDN)",
@@ -309,7 +318,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
 
   en: {
     /* ---------- header / global ---------- */
-    credito: "TrazaFlor · hub of the Traceability System",
+    credito: "TrazaFlor · powered by Xpotrack",
     selector_idioma_aria: "Language selector",
     nuevo: "new",
     aria_cambios_sin_ver: "unseen changes",
@@ -321,7 +330,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
 
     /* ---------- index.html ---------- */
     tagline: "A shared case file, advanced by scans, visible by role.",
-    resumen_1: 'Every export order lives in a <strong>single digital case file</strong>, fed by the tracking the Traceability System already performs on every box.',
+    resumen_1: 'Every export order lives in a <strong>single digital case file</strong>, fed by the tracking Xpotrack already performs on every box.',
     resumen_2: 'Every box carries a <strong>QR code</strong>; every scan — at the farm, the agency, the palletizer, and the airline — <strong>advances the status</strong> of the case file in real time.',
     resumen_3: 'Every actor — farm, guild, cargo agency, and <strong>Agrocalidad</strong> — sees the same case file through <strong>its own permissions window</strong>.',
 
@@ -360,7 +369,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     diagrama_n1_sub: "creates the order",
     diagrama_n2: "Agrocalidad",
     diagrama_n2_sub: "verifies the request · GUIA",
-    diagrama_n3: "Traceability System",
+    diagrama_n3: "Xpotrack",
     diagrama_n3_sub: "issues the labels",
     diagrama_n4: "Agency",
     diagrama_n4_sub: "receives and scans",
@@ -401,7 +410,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     aria_vista_agrocalidad: "Agrocalidad view",
     btn_reiniciar: "◀ Reset",
     btn_avanzar: "Advance simulation ▶",
-    progreso_nota: "Status data provided by the Traceability System",
+    progreso_nota: "Status data provided by Xpotrack",
     nodo_ir_a_estado: "Go to state {n}: {nombre}",
 
     /* ---------- caja.html: static chrome ---------- */
@@ -421,8 +430,8 @@ export const I18N: Record<Lang, Record<string, string>> = {
     estado_toast_creado: "Florícola El Rosal created order PED-2026-0417 · invoice not yet transmitted",
     estado_toast_validado_guia: "Validated by GUIA · booking confirmed by the agency",
     estado_toast_etiquetado: "24 QR labels issued · USD 2.26 payment order generated",
-    estado_toast_recibido_agencia: "AeroCarga Andina received the 24 boxes in Tababela · ⚠ weight discrepancy detected",
-    estado_toast_cfe_emitido: "Weight discrepancy resolved · CFE issued · ePhyto",
+    estado_toast_recibido_agencia: "AeroCarga Andina received the 24 boxes in Tababela · ⚠ labeling discrepancy detected",
+    estado_toast_cfe_emitido: "Labeling discrepancy resolved · CFE issued · ePhyto",
     estado_toast_paletizado: "Boxes verified and palletized · consolidation authorized with CFE verified",
     estado_toast_salida_autorizada: "ECUAPASS authorized departure · DAE 055-2026-40-01234567",
     estado_toast_embarcado: "Boxes shipped on flight LA-1447 · manifest transmitted",
@@ -451,12 +460,12 @@ export const I18N: Record<Lang, Record<string, string>> = {
     /* ---------- scripted alert ---------- */
     alerta_activa_label: "Active alert:",
     alerta_archivada_sufijo: "— archived in the history",
-    alerta_texto_abierta: "Weight discrepancy: declared 312 kg, scanned 298 kg",
-    alerta_texto_resuelta: "Resolved: weight corrected in the case file",
-    alerta_abierta_accion: "ALERT · Weight discrepancy: declared 312 kg, scanned 298 kg",
-    alerta_resuelta_accion: "Alert resolved: weight corrected in the case file (298 kg)",
+    alerta_texto_abierta: "Labeling discrepancy: box {caja} marked var. Explorer · case file states var. Freedom",
+    alerta_texto_resuelta: "Resolved: variety verified at farm and corrected in the case file — required for issuance",
+    alerta_abierta_accion: "ALERT · Labeling discrepancy: box ROS-0417-014 marked var. Explorer · case file states var. Freedom",
+    alerta_resuelta_accion: "Alert resolved: variety verified and corrected in the case file (box ROS-0417-014)",
     sistema_actor: "System {app}",
-    actor_sistema: "Traceability System",
+    actor_sistema: "Xpotrack",
 
     /* ---------- overrides for data fields with generic words ---------- */
     producto_descripcion: "Rose var. Freedom",
@@ -486,7 +495,6 @@ export const I18N: Record<Lang, Record<string, string>> = {
     label_monto_pedido: "Order amount",
     label_etiqueta_agrocalidad: "Agrocalidad label",
     label_cfe: "CFE",
-    palabra_escaneado: "scanned",
     palabra_declarado: "declared",
 
     campo_oculto_title: "This data exists in the case file but isn't visible for this role",
@@ -507,7 +515,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     doc_factura_prefix: "📄 Commercial invoice",
     doc_factura_borrador: "draft (not transmitted)",
     doc_factura_registrada: "recorded in the case file",
-    doc_etiquetas_emitidas: "🏷️ Agrocalidad-type labels — 24/24 issued by the Traceability System",
+    doc_etiquetas_emitidas: "🏷️ Agrocalidad-type labels — 24/24 issued by Xpotrack",
     doc_etiquetas_pendientes: "🏷️ Agrocalidad-type labels — pending",
     doc_cfe_emitido: "✅ CFE {numero} · {ephyto}",
     doc_cfe_pendiente: "📋 CFE — pending",
@@ -527,7 +535,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     resumen_historial_uno: "View full history (1 event)",
 
     /* ---------- Expoflores tab ---------- */
-    flag_alerta_peso: "⚠ weight alert",
+    flag_alerta_variedad: "⚠ variety alert",
     flag_sin_alertas: "✓ no alerts",
     nota_gobernanza: 'ℹ️ <strong>Expoflores operates the platform but does not access commercial data.</strong> Governance: multi-stakeholder committee.',
     kpi_pedidos_activos: "Active orders today",
@@ -566,9 +574,9 @@ export const I18N: Record<Lang, Record<string, string>> = {
     check_variedad: "✓ Freedom variety registered at the site",
     nota_simulacion_api: "Simulated API response — GUIA",
     vacio_validacion: "Pending — runs once GUIA validates the order.",
-    emision_titulo: "Request verified · labels issued by the Traceability System",
+    emision_titulo: "Request verified · labels issued by Xpotrack",
     etiquetas_emitidas: "{n} labels issued · payment order <strong>{total}</strong> ({detalle})",
-    nota_instrumento_agrocalidad: "Agrocalidad instrument · fee {detalle} · issuance delegated to the Traceability System",
+    nota_instrumento_agrocalidad: "Agrocalidad instrument · fee {detalle} · issuance delegated to Xpotrack",
     resumen_ver_etiquetas: "View all 24 labels",
     vacio_etiquetas: "Pending — labels are issued after validation.",
     custodia_titulo: "Chain of custody",
@@ -584,13 +592,23 @@ export const I18N: Record<Lang, Record<string, string>> = {
     tabla_ubicacion: "Location",
     vacio_custodia: "No scans yet — the chain starts with labeling.",
     certificacion_titulo: "Certification",
-    certificacion_bloqueada: "CFE issuance on hold: unresolved weight discrepancy",
-    certificacion_requisito_cumplido: "✔ Weight discrepancy resolved · required for issuance",
+    certificacion_bloqueada: "CFE issuance on hold: unresolved variety discrepancy",
+    certificacion_requisito_cumplido: "✔ Variety discrepancy resolved · required for issuance",
     cfe_emitido: "✔ <strong>CFE (phytosanitary export certificate) issued · ePhyto (electronic phytosanitary certificate) transmitted · {cfe}</strong><br>{numero} · {ephyto}",
     cardinalidad_pedido: "1 order",
     cardinalidad_cfe: "1 CFE",
     cardinalidad_etiquetas: "24 labels",
     vacio_certificacion: "Pending — the CFE is issued once the order is validated and labeled (a single certificate covers all 24 boxes).",
+
+    /* ---------- SENAE tab ---------- */
+    aria_vista_senae: "SENAE view",
+    senae_declaracion_titulo: "Customs declaration (DAE)",
+    senae_dae_abierta: "DAE {dae} · open",
+    senae_espera_zona_primaria: "Departure pending arrival at primary zone",
+    senae_salida_autorizada: "Departure authorized · automatic customs assessment",
+    senae_manifiesto_recibido: "Manifest received from the airline",
+    senae_dae_cerrada: "DAE regularized and closed",
+    label_cfe_asociado: "Associated CFE",
 
     /* ---------- QR ---------- */
     qr_no_disponible: "QR unavailable (no CDN connection)",

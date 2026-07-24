@@ -17,7 +17,7 @@ export type EstadoKey =
   | "cerrado";
 
 /** Roles que observan el mismo expediente con permisos distintos. */
-export type Rol = "finca" | "expoflores" | "agencia" | "agrocalidad";
+export type Rol = "finca" | "expoflores" | "agencia" | "agrocalidad" | "senae";
 
 /**
  * Identidad estable de un actor del flujo. Reemplaza el acoplamiento por
@@ -69,7 +69,8 @@ export interface Estado {
   cajaEvento: CajaEvento | null;
 }
 
-/** Alerta scripted de discrepancia de peso (abre y se resuelve por estado). */
+/** Alerta scripted de discrepancia de etiquetado de variedad (abre y se
+    resuelve por estado). */
 export interface Alerta {
   abierta: { hora: string; lugar: string };
   resuelta: { hora: string; actorId: ActorId; lugar: string };
@@ -91,7 +92,6 @@ export interface Pedido {
     tallosPorCaja: number;
     tallosTotal: string;
     pesoDeclarado: string;
-    pesoEscaneado: string;
   };
   monto: string;
   agencia: { nombre: string; agente: string };
